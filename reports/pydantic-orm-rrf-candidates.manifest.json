@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "chunk_words": 112,
+  "dataset_sha256": {
+    "zh": "8545c8cb6c5343250e1f68b7024eb3d02ff8eecd80c3637ea67d30a3cbd9dde9",
+    "api": "115144a1a031118e38575feea83802cc596173931356a3e993d6f30d59d911e2"
+  },
+  "corpus_sha256": {
+    "v1.10.15": "93a04c0e93631d0e7be8910014a3176b07502b4852e5ba606ffa693d7c2a6c21",
+    "v2.7.4": "8cb75405555cae1ea233aab26294e060ea62f71a9d8e011fd46cdc89511425e2"
+  },
+  "source_commits": {
+    "v1.10.15": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",
+    "v2.7.4": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719"
+  },
+  "dense": {
+    "model": "BAAI/bge-m3",
+    "revision": "5617a9f61b028005a4858fdac845db406aefb181"
+  },
+  "rrf": {
+    "k": 60,
+    "branch_limit": 40,
+    "pool_size": 30
+  },
+  "generation_id": "5320dea9554836dd0587395a8e7ecd5c46374814c4a0a2c03e6781772b5a6f1d",
+  "candidate_sha256": "30f8442036b054e4ed577bdd7f48689f18d51df45d5341cc53d894fe1e47e3c3",
+  "candidate_count": 240
+}

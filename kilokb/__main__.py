@@ -3,6 +3,7 @@
 import argparse
 import json
 import sys
+from pathlib import Path
 
 from .bm25 import search_bm25
 from .corpus import load_source, read_lock
@@ -38,10 +39,24 @@ def main() -> None:
     compare.add_argument("--hybrid", action="store_true", help="Include RRF and questions with API names")
     add_ranking_options(compare)
     add_model_options(compare)
+    freeze = commands.add_parser("orm-rerank-freeze", help="Freeze RRF Top 30 per question and version")
+    freeze.add_argument("--output", type=Path, required=True)
+    freeze.add_argument("--chunk-words", type=int, default=112)
+    add_model_options(freeze)
+    rerank = commands.add_parser("orm-rerank", help="Replay frozen candidates with both BGE rerankers")
+    rerank.add_argument("--candidates", type=Path, required=True)
+    rerank.add_argument("--top-k", type=int, default=5)
+    rerank.add_argument("--rounds", type=int, default=5)
+    rerank.add_argument("--warmup", type=int, default=10)
+    add_model_options(rerank)
     options = parser.parse_args()
-    command = demo if options.command == "orm-demo" else compare
-    if options.chunk_words < 1 or options.top_k < 1:
-        command.error("--chunk-words and --top-k must be positive")
+    command = {"orm-demo": demo, "orm-compare": compare,
+               "orm-rerank-freeze": freeze, "orm-rerank": rerank}[options.command]
+    for field in ("chunk_words", "top_k", "rounds"):
+        if getattr(options, field, 1) < 1:
+            command.error(f"--{field.replace('_', '-')} must be positive")
+    if getattr(options, "warmup", 0) < 0:
+        command.error("--warmup must be non-negative")
     if options.command == "orm-demo" and not options.query.strip():
         demo.error("--query must not be blank")
 
@@ -53,6 +68,21 @@ def main() -> None:
             model = BgeM3(options.device, options.local_files_only)
             result = compare_orm(lock, model, options.chunk_words, options.top_k,
                                  options.device, include_hybrid=options.hybrid)
+        elif options.command == "orm-rerank-freeze":
+            from .dense import BgeM3
+            from .frozen import freeze_orm
+
+            model = BgeM3(options.device, options.local_files_only)
+            result = freeze_orm(lock, model, options.output, options.chunk_words)
+        elif options.command == "orm-rerank":
+            from .frozen import load_frozen
+            from .rerank_experiment import compare_rerankers
+
+            manifest, cases = load_frozen(lock, options.candidates)
+            result = compare_rerankers(
+                manifest, cases, options.device, options.local_files_only,
+                options.top_k, options.warmup, options.rounds,
+            )
         else:
             result = run_demo(lock, options)
     except (OSError, RuntimeError, ValueError) as exc:

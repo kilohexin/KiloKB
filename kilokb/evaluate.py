@@ -3,6 +3,7 @@
 import hashlib
 import json
 import platform
+from dataclasses import dataclass
 from importlib.metadata import version
 from pathlib import Path
 
@@ -15,6 +16,63 @@ from .rrf import RRF_CANDIDATES, RRF_K, fuse_rrf
 
 DATASET = LOCK.parent.parent / "evals" / "pydantic-orm-zh.json"
 API_DATASET = DATASET.with_name("pydantic-orm-api.json")
+
+
+@dataclass(frozen=True)
+class RetrievalRow:
+    group: str
+    qid: str
+    query: str
+    source: Source
+    lines: list[int]
+    bm25: list[tuple[Chunk, float]]
+    dense: list[tuple[Chunk, float]]
+
+
+def question_paths(include_api: bool) -> dict[str, Path]:
+    return {"zh": DATASET, "api": API_DATASET} if include_api else {"zh": DATASET}
+
+
+def question_cases(datasets: dict[str, bytes]) -> list[tuple[str, dict]]:
+    return [(group, case) for group, raw in datasets.items() for case in json.loads(raw)]
+
+
+def retrieve_cases(
+    lock: dict, model: BgeM3, chunk_words: int, candidate_limit: int, cases: list[tuple[str, dict]]
+):
+    releases = dict.fromkeys(tag for _, case in cases for tag in case["versions"])
+    sources = {tag: load_source(lock, tag) for tag in releases}
+    chunks = {tag: chunk_markdown(source.text, chunk_words) for tag, source in sources.items()}
+    vectors = {tag: model.encode([chunk.retrieval_text for chunk in chunks[tag]]) for tag in releases}
+    queries = model.encode([case["query"] for _, case in cases])
+    for (group, case), query_vector in zip(cases, queries, strict=True):
+        for tag, lines in case["versions"].items():
+            yield RetrievalRow(
+                group, case["qid"], case["query"], sources[tag], lines,
+                search_bm25(case["query"], chunks[tag], candidate_limit),
+                rank_dense(chunks[tag], vectors[tag], query_vector, candidate_limit),
+            )
+
+
+def source_hashes() -> dict[str, str]:
+    return {
+        path.name: hashlib.sha256(path.read_text(encoding="utf-8").encode("utf-8")).hexdigest()
+        for path in sorted(Path(__file__).parent.glob("*.py"))
+    }
+
+
+def runtime_metadata(device: str) -> dict:
+    import torch
+
+    return {
+        "python": platform.python_version(),
+        "platform": platform.platform(),
+        "processor": torch.cuda.get_device_name() if device == "cuda" else platform.processor(),
+        "torch_threads": torch.get_num_threads(),
+        "dependencies": {name: version(name) for name in (
+            "torch", "transformers", "sentence-transformers", "huggingface-hub", "numpy", "safetensors",
+        )},
+    }
 
 
 def evidence_ranks(lines: list[int], hits: list[tuple[Chunk, float]]) -> dict[int, int | None]:
@@ -61,53 +119,39 @@ def compare_orm(
     lock: dict, model: BgeM3, chunk_words: int, top_k: int, device: str,
     *, include_hybrid: bool = False,
 ) -> dict:
-    paths = {"zh": DATASET}
-    if include_hybrid:
-        paths["api"] = API_DATASET
+    paths = question_paths(include_hybrid)
     datasets = {group: path.read_bytes() for group, path in paths.items()}
-    cases = [(group, case) for group, raw in datasets.items() for case in json.loads(raw)]
+    cases = question_cases(datasets)
     releases = dict.fromkeys(tag for _, case in cases for tag in case["versions"])
-    sources = {tag: load_source(lock, tag) for tag in releases}
-    chunks = {tag: chunk_markdown(source.text, chunk_words) for tag, source in sources.items()}
-    vectors = {tag: model.encode([chunk.retrieval_text for chunk in chunks[tag]]) for tag in releases}
-    queries = model.encode([case["query"] for _, case in cases])
     candidate_limit = max(RRF_CANDIDATES, top_k) if include_hybrid else top_k
 
     rows = []
-    for (group, case), query_vector in zip(cases, queries, strict=True):
-        for tag, lines in case["versions"].items():
-            bm25 = search_bm25(case["query"], chunks[tag], candidate_limit)
-            dense = rank_dense(chunks[tag], vectors[tag], query_vector, candidate_limit)
-            row = {
-                "qid": case["qid"],
-                "query": case["query"],
-                "version": tag,
-                "source_commit": sources[tag].commit,
-                "source_path": sources[tag].path,
-                "bm25": measure(sources[tag], lines, bm25[:top_k]),
-                "dense": measure(sources[tag], lines, dense[:top_k]),
-            }
-            if include_hybrid:
-                fused = fuse_rrf(bm25, dense, top_k)
-                row["question_set"] = group
-                row["hybrid"] = measure(
-                    sources[tag], lines,
-                    [(hit.chunk, hit.score) for hit in fused], ranks=[hit.ranks for hit in fused],
-                )
-            rows.append(row)
+    for result in retrieve_cases(lock, model, chunk_words, candidate_limit, cases):
+        source, lines = result.source, result.lines
+        row = {
+            "qid": result.qid,
+            "query": result.query,
+            "version": source.release,
+            "source_commit": source.commit,
+            "source_path": source.path,
+            "bm25": measure(source, lines, result.bm25[:top_k]),
+            "dense": measure(source, lines, result.dense[:top_k]),
+        }
+        if include_hybrid:
+            fused = fuse_rrf(result.bm25, result.dense, top_k)
+            row["question_set"] = result.group
+            row["hybrid"] = measure(
+                source, lines, [(hit.chunk, hit.score) for hit in fused],
+                ranks=[hit.ranks for hit in fused],
+            )
+        rows.append(row)
 
-    import torch
-
-    source_files = sorted(Path(__file__).parent.glob("*.py"))
     engines = ("bm25", "dense", "hybrid") if include_hybrid else ("bm25", "dense")
     report = {
         "dataset": DATASET.name,
         "dataset_sha256": hashlib.sha256(datasets["zh"]).hexdigest(),
         "corpus_sha256": {tag: lock["releases"][tag]["sha256"] for tag in releases},
-        "source_sha256": {
-            path.name: hashlib.sha256(path.read_text(encoding="utf-8").encode("utf-8")).hexdigest()
-            for path in source_files
-        },
+        "source_sha256": source_hashes(),
         "chunk_words": chunk_words,
         "top_k": top_k,
         "model": {
@@ -120,13 +164,7 @@ def compare_orm(
             "pooling": "CLS",
             "ranking": "cosine",
         },
-        "runtime": {
-            "python": platform.python_version(),
-            "platform": platform.platform(),
-            "processor": torch.cuda.get_device_name() if device == "cuda" else platform.processor(),
-            "torch_threads": torch.get_num_threads(),
-            "dependencies": {name: version(name) for name in ("torch", "transformers", "sentence-transformers")},
-        },
+        "runtime": runtime_metadata(device),
         "summary": summarize(rows, engines),
         "cases": rows,
     }

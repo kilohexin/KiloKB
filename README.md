@@ -78,3 +78,33 @@ python -m kilokb orm-compare --hybrid --chunk-words 112 --top-k 5 --device cpu
 | 含 API 名称 | 命中的证据锚点 | 8/8 | 7/8 | 8/8 |
 
 原纯中文跨版本题里，BM25 没有候选，Hybrid 与 Dense 的 Top 5 顺序相同。加入 API 名称后，V2 的调用示例在 BM25 排第 2、Dense 排第 11，融合后排第 3。这个结果展示了包含标识符时词法召回对融合的贡献。 [V2 调用示例原文第 285 行](https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L285)
+
+## 冻结 RRF 候选后的重排
+
+原来的六道题共八个「题目 × 版本」组合。每个组合冻结 RRF 前 30，合计 240 条，记录输入名次、原文区间和文本 SHA-256。三组读取同一份候选文件，回放时校验题集、语料及候选哈希。候选文本统一使用标题路径和原文。 [冻结候选](reports/pydantic-orm-rrf-candidates.jsonl) · [校验清单](reports/pydantic-orm-rrf-candidates.manifest.json)
+
+```sh
+python -m pip install -r requirements-dense.txt
+python -m kilokb orm-rerank-freeze --output reports/pydantic-orm-rrf-candidates.jsonl
+python -m kilokb orm-rerank --candidates reports/pydantic-orm-rrf-candidates.jsonl --top-k 5 --warmup 10 --rounds 5 --device cpu
+```
+
+仓库已提供冻结文件，也可以直接执行回放。首次回放会额外缓存约 2.3 GB 的 Cross-Encoder 权重和 BGE-M3 的投影权重。所需文件入缓存后可加 `--local-files-only`。用兼容 CUDA 的 PyTorch 可把回放设备改为 `cuda`。
+
+R0 直接取 RRF 前五。R1 让 BGE Cross-Encoder 联合读取每一对问题和候选。R2 用 BGE-M3 的多向量投影预计算文档向量，在线编码问题，对每个查询 token 找到最相似的文档 token，再取平均。当前小语料用内存精确打分。 [Cross-Encoder 模型卡](https://huggingface.co/BAAI/bge-reranker-v2-m3/tree/953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e) · [BGE-M3 多向量公式](https://bge-model.com/bge/bge_m3.html#multi-vector)
+
+| 方案 | 纯中文 Top 5 锚点 | 含 API 名称 Top 5 锚点 | 证据齐全的组合 |
+|---|---:|---:|---:|
+| RRF 保持原序 | 7/8 | 8/8 | 7/8 |
+| BGE Cross-Encoder | 4/8 | 8/8 | 5/8 |
+| BGE-M3 MaxSim | 8/8 | 8/8 | 8/8 |
+
+原纯中文跨版本题的 V2 调用示例在冻结候选中排第 8。MaxSim 将它提升至第 2。Cross-Encoder 的前五未覆盖这段示例。这六道相关题用于复查具体失败和取舍。 [V2 原文](https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L285) · [完整实测报告](reports/pydantic-orm-rerank-cuda.json)
+
+| 方案 | 回放 P50 | 回放 P95 |
+|---|---:|---:|
+| RRF 保持原序 | <0.01 ms | <0.01 ms |
+| BGE Cross-Encoder | 400.29 ms | 528.20 ms |
+| BGE-M3 MaxSim | 11.09 ms | 14.49 ms |
+
+实测环境为 RTX 4070 Ti、FP32、单并发和 PyTorch 2.6.0+cu124。每组预热 10 次，测量 5 轮共 40 次。耗时从冻结候选开始，覆盖在线查询处理、打分和排序。模型加载与文档预计算独立记录。MaxSim 为 85 个唯一候选片段预计算了约 75 MiB 的原始向量。报告同时给出了实际截断数和各方法的额外显存峰值。
