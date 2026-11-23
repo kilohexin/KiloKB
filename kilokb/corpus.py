@@ -19,9 +19,9 @@ class Source:
     path: str
     text: str
 
-    def hit(self, chunk: Chunk, score: float) -> dict:
+    def hit(self, chunk: Chunk, score: float, *, ranks: dict[str, int | None] | None = None) -> dict:
         root = f"https://github.com/{self.repo}/blob/{self.commit}/{self.path}"
-        return {
+        result = {
             "release": self.release,
             "commit": self.commit,
             "path": self.path,
@@ -32,6 +32,9 @@ class Source:
             "score": score,
             "url": f"{root}#L{chunk.start_line}-L{chunk.end_line}",
         }
+        if ranks is not None:
+            result["ranks"] = ranks
+        return result
 
 
 def read_lock() -> dict:
