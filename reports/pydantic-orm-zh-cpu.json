@@ -1,0 +1,422 @@
+{
+  "dataset": "pydantic-orm-zh.json",
+  "dataset_sha256": "8545c8cb6c5343250e1f68b7024eb3d02ff8eecd80c3637ea67d30a3cbd9dde9",
+  "corpus_sha256": {
+    "v1.10.15": "93a04c0e93631d0e7be8910014a3176b07502b4852e5ba606ffa693d7c2a6c21",
+    "v2.7.4": "8cb75405555cae1ea233aab26294e060ea62f71a9d8e011fd46cdc89511425e2"
+  },
+  "source_sha256": {
+    "__init__.py": "d63cb42b9e3f73d15eae15ad0868b491235d088587c886426b93c6141794f4d1",
+    "__main__.py": "80a71eb368dca177b056a134638e5894f02e73beb3508d2766319f95b4a58c07",
+    "bm25.py": "c9603214e4429ba10350cbd77c81d47e9ff5be1b707c87304dcad0adde0f5356",
+    "corpus.py": "57e6d78f84dfaaf998466cff63f65df97fa4f2a9d7ab8a578563f6b9b94c2b0c",
+    "dense.py": "6376479ef922c5acfe7d7659c43e205d27c341339e2ce08bade4d903b160cc79",
+    "evaluate.py": "54c3f2eb19056979793fb096b25bfd6cfb3c7ddcb7773cbd98f670826ccbcab7",
+    "markdown.py": "bafcb5e5fc03e10042872b070ccbda6725e39996a617104271b5d4ffd86ddfc3"
+  },
+  "chunk_words": 112,
+  "top_k": 5,
+  "model": {
+    "id": "BAAI/bge-m3",
+    "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "max_tokens": 512,
+    "batch_size": 16,
+    "device": "cpu",
+    "precision": "float32",
+    "pooling": "CLS",
+    "ranking": "cosine"
+  },
+  "runtime": {
+    "python": "3.13.12",
+    "platform": "Windows-11-10.0.26100-SP0",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "torch_threads": 8,
+    "dependencies": {
+      "torch": "2.11.0",
+      "transformers": "5.4.0",
+      "sentence-transformers": "5.3.0"
+    }
+  },
+  "summary": {
+    "bm25": {
+      "all_evidence_cases": 0,
+      "total_cases": 4,
+      "anchors_found": 0,
+      "total_anchors": 8
+    },
+    "dense": {
+      "all_evidence_cases": 3,
+      "total_cases": 4,
+      "anchors_found": 7,
+      "total_anchors": 8
+    }
+  },
+  "cases": [
+    {
+      "qid": "orm-compare",
+      "query": "\u600e\u6837\u4ece\u6570\u636e\u5e93\u6620\u5c04\u5bf9\u8c61\u7684\u5c5e\u6027\u8bfb\u53d6\u6570\u636e\u5e76\u6784\u5efa\u6821\u9a8c\u6a21\u578b\uff1f\u9700\u8981\u5f00\u542f\u4ec0\u4e48\u914d\u7f6e\uff0c\u8c03\u7528\u4ec0\u4e48\u65b9\u6cd5\uff1f",
+      "version": "v1.10.15",
+      "source_commit": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",
+      "source_path": "docs/usage/models.md",
+      "bm25": {
+        "returned": 0,
+        "evidence_ranks": {
+          "128": null,
+          "129": null
+        },
+        "hits": []
+      },
+      "dense": {
+        "returned": 5,
+        "evidence_ranks": {
+          "128": 5,
+          "129": 5
+        },
+        "hits": [
+          {
+            "release": "v1.10.15",
+            "commit": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",
+            "path": "docs/usage/models.md",
+            "start_line": 84,
+            "end_line": 111,
+            "heading_path": [
+              "Basic model usage",
+              "Model properties"
+            ],
+            "text": "  cf. [helper functions](#helper-functions)\n\n`parse_raw()`\n: a utility for loading strings of numerous formats; cf. [helper functions](#helper-functions)\n\n`parse_file()`\n: like `parse_raw()` but for file paths; cf. [helper functions](#helper-functions)\n\n`from_orm()`\n: loads data into a model from an arbitrary class; cf. [ORM mode](#orm-mode-aka-arbitrary-class-instances)\n\n`schema()`\n: returns a dictionary representing the model as JSON Schema; cf. [schema](schema.md)\n\n`schema_json()`\n: returns a JSON string representation of `schema()`; cf. [schema](schema.md)\n\n`construct()`\n: a class method for creating models without running validation; \n  cf. [Creating models without validation](#creating-models-without-validation)\n\n`__fields_set__`\n: Set of names of fields which were set when the model instance was initialised\n\n`__fields__`\n: a dictionary of the model's fields\n\n`__config__`",
+            "score": 0.56794673204422,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111"
+          },
+          {
+            "release": "v1.10.15",
+            "commit": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",
+            "path": "docs/usage/models.md",
+            "start_line": 66,
+            "end_line": 89,
+            "heading_path": [
+              "Basic model usage",
+              "Model properties"
+            ],
+            "text": "### Model properties\n\nThe example above only shows the tip of the iceberg of what models can do. \nModels possess the following methods and attributes:\n\n`dict()`\n: returns a dictionary of the model's fields and values; \n  cf. [exporting models](exporting_models.md#modeldict)\n\n`json()`\n: returns a JSON string representation `dict()`; \n  cf. [exporting models](exporting_models.md#modeljson)\n\n`copy()`\n: returns a copy (by default, shallow copy) of the model; cf. [exporting models](exporting_models.md#modelcopy)\n\n`parse_obj()`\n: a utility for loading any object into a model with error handling if the object is not a dictionary;\n  cf. [helper functions](#helper-functions)\n\n`parse_raw()`\n: a utility for loading strings of numerous formats; cf. [helper functions](#helper-functions)\n\n`parse_file()`",
+            "score": 0.561398983001709,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L66-L89"
+          },
+          {
+            "release": "v1.10.15",
+            "commit": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",
+            "path": "docs/usage/models.md",
+            "start_line": 155,
+            "end_line": 166,
+            "heading_path": [
+              "ORM Mode (aka Arbitrary Class Instances)",
+              "Data binding"
+            ],
+            "text": "### Data binding\n\nArbitrary classes are processed by *pydantic* using the `GetterDict` class (see\n[utils.py](https://github.com/pydantic/pydantic/blob/1.10.X-fixes/pydantic/utils.py)), which attempts to\nprovide a dictionary-like interface to any class. You can customise how this works by setting your own\nsub-class of `GetterDict` as the value of `Config.getter_dict` (see [config](model_config.md)).\n\nYou can also customise class validation using [root_validators](validators.md#root-validators) with `pre=True`. \nIn this case your validator function will be passed a `GetterDict` instance which you may copy and modify.\n\nThe `GetterDict` instance will be called for each field with a sentinel as a fallback (if no other default\nvalue is set). Returning this sentinel means that the field is missing. Any other value will",
+            "score": 0.557190477848053,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166"
+          },
+          {
+            "release": "v1.10.15",
+            "commit": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",
+            "path": "docs/usage/models.md",
+            "start_line": 21,
+            "end_line": 38,
+            "heading_path": [
+              "Basic model usage"
+            ],
+            "text": "## Basic model usage\n\n```py\nfrom pydantic import BaseModel\n\nclass User(BaseModel):\n    id: int\n    name = 'Jane Doe'\n```\n`User` here is a model with two fields `id` which is an integer and is required, \nand `name` which is a string and is not required (it has a default value). The type of `name` is inferred from the\ndefault value, and so a type annotation is not required (however note [this](#field-ordering) warning about field \norder when some fields do not have type annotations).\n```py\nuser = User(id='123')\nuser_x = User(id='123.45')\n```\n`user` here is an instance of `User`. Initialisation of the object will perform all parsing and validation,",
+            "score": 0.5412499308586121,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L21-L38"
+          },
+          {
+            "release": "v1.10.15",
+            "commit": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",
+            "path": "docs/usage/models.md",
+            "start_line": 122,
+            "end_line": 134,
+            "heading_path": [
+              "ORM Mode (aka Arbitrary Class Instances)"
+            ],
+            "text": "## ORM Mode (aka Arbitrary Class Instances)\n\nPydantic models can be created from arbitrary class instances to support models that map to ORM objects.\n\nTo do this:\n\n1. The [Config](model_config.md) property `orm_mode` must be set to `True`.\n2. The special constructor `from_orm` must be used to create the model instance.\n\nThe example here uses SQLAlchemy, but the same approach should work for any ORM.\n\n{!.tmp_examples/models_orm_mode.md!}\n",
+            "score": 0.5402766466140747,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134"
+          }
+        ]
+      }
+    },
+    {
+      "qid": "orm-compare",
+      "query": "\u600e\u6837\u4ece\u6570\u636e\u5e93\u6620\u5c04\u5bf9\u8c61\u7684\u5c5e\u6027\u8bfb\u53d6\u6570\u636e\u5e76\u6784\u5efa\u6821\u9a8c\u6a21\u578b\uff1f\u9700\u8981\u5f00\u542f\u4ec0\u4e48\u914d\u7f6e\uff0c\u8c03\u7528\u4ec0\u4e48\u65b9\u6cd5\uff1f",
+      "version": "v2.7.4",
+      "source_commit": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719",
+      "source_path": "docs/concepts/models.md",
+      "bm25": {
+        "returned": 0,
+        "evidence_ranks": {
+          "241": null,
+          "285": null
+        },
+        "hits": []
+      },
+      "dense": {
+        "returned": 5,
+        "evidence_ranks": {
+          "241": 1,
+          "285": null
+        },
+        "hits": [
+          {
+            "release": "v2.7.4",
+            "commit": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719",
+            "path": "docs/concepts/models.md",
+            "start_line": 233,
+            "end_line": 261,
+            "heading_path": [
+              "Arbitrary class instances"
+            ],
+            "text": "## Arbitrary class instances\n\n(Formerly known as \"ORM Mode\"/`from_orm`.)\n\nPydantic models can also be created from arbitrary class instances by reading the instance attributes corresponding\nto the model field names. One common application of this functionality is integration with object-relational mappings\n(ORMs).\n\nTo do this, set the config attribute `model_config['from_attributes'] = True`. See\n[Model Config][pydantic.config.ConfigDict.from_attributes] and [ConfigDict][pydantic.config.ConfigDict] for more information.\n\nThe example here uses [SQLAlchemy](https://www.sqlalchemy.org/), but the same approach should work for any ORM.\n\n```py\nfrom typing import List\n\nfrom sqlalchemy import Column, Integer, String\nfrom sqlalchemy.dialects.postgresql import ARRAY\nfrom sqlalchemy.orm import declarative_base\nfrom typing_extensions import Annotated\n\nfrom pydantic import BaseModel, ConfigDict, StringConstraints\n\nBase = declarative_base()\n\n\nclass CompanyOrm(Base):\n    __tablename__ = 'companies'\n",
+            "score": 0.5803795456886292,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261"
+          },
+          {
+            "release": "v2.7.4",
+            "commit": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719",
+            "path": "docs/concepts/models.md",
+            "start_line": 323,
+            "end_line": 335,
+            "heading_path": [
+              "Arbitrary class instances",
+              "Reserved names"
+            ],
+            "text": "\npydantic_model = MyModel.model_validate(sql_model)\n\nprint(pydantic_model.model_dump())\n#> {'metadata': {'key': 'val'}}\nprint(pydantic_model.model_dump(by_alias=True))\n#> {'metadata_': {'key': 'val'}}\n```\n\n!!! note\n    The example above works because aliases have priority over field names for\n    field population. Accessing `SQLModel`'s `metadata` attribute would lead to a `ValidationError`.\n",
+            "score": 0.5588289499282837,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L323-L335"
+          },
+          {
+            "release": "v2.7.4",
+            "commit": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719",
+            "path": "docs/concepts/models.md",
+            "start_line": 487,
+            "end_line": 506,
+            "heading_path": [
+              "Helper functions"
+            ],
+            "text": "then pass it to [`model_validate`][pydantic.main.BaseModel.model_validate].\n\n!!! note\n    Depending on the types and model configs involved, [`model_validate`][pydantic.main.BaseModel.model_validate]\n    and [`model_validate_json`][pydantic.main.BaseModel.model_validate_json] may have different validation behavior.\n    If you have data coming from a non-JSON source, but want the same validation\n    behavior and errors you'd get from [`model_validate_json`][pydantic.main.BaseModel.model_validate_json],\n    our recommendation for now is to use `model_validate_json(json.dumps(data))`.\n\n!!! note\n    Learn more about JSON parsing in the [JSON](../concepts/json.md) section of the docs.\n\n!!! note\n    If you're passing in an instance of a model to [`model_validate`][pydantic.main.BaseModel.model_validate], you will want to consider setting\n    [`revalidate_instances`](https://docs.pydantic.dev/latest/api/config/#pydantic.config.ConfigDict.revalidate_instances)\n    in the model's config. If you don't set this value, then validation will be skipped on model instances. See the below example:\n\n\n=== \":x: `revalidate_instances='never'`\"\n    ```py",
+            "score": 0.5525146722793579,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L487-L506"
+          },
+          {
+            "release": "v2.7.4",
+            "commit": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719",
+            "path": "docs/concepts/models.md",
+            "start_line": 336,
+            "end_line": 378,
+            "heading_path": [
+              "Arbitrary class instances",
+              "Nested attributes"
+            ],
+            "text": "### Nested attributes\n\nWhen using attributes to parse models, model instances will be created from both top-level attributes and\ndeeper-nested attributes as appropriate.\n\nHere is an example demonstrating the principle:\n\n```py\nfrom typing import List\n\nfrom pydantic import BaseModel, ConfigDict\n\n\nclass PetCls:\n    def __init__(self, *, name: str, species: str):\n        self.name = name\n        self.species = species\n\n\nclass PersonCls:\n    def __init__(self, *, name: str, age: float = None, pets: List[PetCls]):\n        self.name = name\n        self.age = age\n        self.pets = pets\n\n\nclass Pet(BaseModel):\n    model_config = ConfigDict(from_attributes=True)\n\n    name: str\n    species: str\n\n\nclass Person(BaseModel):\n    model_config = ConfigDict(from_attributes=True)\n\n    name: str\n    age: float = None\n    pets: List[Pet]\n\n\nbones = PetCls(name='Bones', species='dog')\norion = PetCls(name='Orion', species='cat')",
+            "score": 0.5448998212814331,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L336-L378"
+          },
+          {
+            "release": "v2.7.4",
+            "commit": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719",
+            "path": "docs/concepts/models.md",
+            "start_line": 133,
+            "end_line": 144,
+            "heading_path": [
+              "Basic model usage",
+              "Model methods and properties"
+            ],
+            "text": "    See [Rebuild model schema](#rebuild-model-schema).\n* [`model_validate()`][pydantic.main.BaseModel.model_validate]: a utility for loading any object into a model. See [Helper functions](#helper-functions).\n* [`model_validate_json()`][pydantic.main.BaseModel.model_validate_json]: a utility for validating the given JSON data against the Pydantic model. See\n    [Helper functions](#helper-functions).\n\n!!! note\n    See [`BaseModel`][pydantic.main.BaseModel] for the class definition including a full list of methods and attributes.\n\n!!! tip\n    See [Changes to `pydantic.BaseModel`](../migration.md#changes-to-pydanticbasemodel) in the\n    [Migration Guide](../migration.md) for details on changes from Pydantic V1.\n",
+            "score": 0.5437972545623779,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L133-L144"
+          }
+        ]
+      }
+    },
+    {
+      "qid": "orm-v1",
+      "query": "\u5982\u4f55\u8ba9\u6570\u636e\u6821\u9a8c\u6a21\u578b\u4ece\u4efb\u610f\u7c7b\u5b9e\u4f8b\u8bfb\u53d6\u5c5e\u6027\u5e76\u521b\u5efa\u6a21\u578b\u5b9e\u4f8b\uff1f",
+      "version": "v1.10.15",
+      "source_commit": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",
+      "source_path": "docs/usage/models.md",
+      "bm25": {
+        "returned": 0,
+        "evidence_ranks": {
+          "128": null,
+          "129": null
+        },
+        "hits": []
+      },
+      "dense": {
+        "returned": 5,
+        "evidence_ranks": {
+          "128": 3,
+          "129": 3
+        },
+        "hits": [
+          {
+            "release": "v1.10.15",
+            "commit": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",
+            "path": "docs/usage/models.md",
+            "start_line": 155,
+            "end_line": 166,
+            "heading_path": [
+              "ORM Mode (aka Arbitrary Class Instances)",
+              "Data binding"
+            ],
+            "text": "### Data binding\n\nArbitrary classes are processed by *pydantic* using the `GetterDict` class (see\n[utils.py](https://github.com/pydantic/pydantic/blob/1.10.X-fixes/pydantic/utils.py)), which attempts to\nprovide a dictionary-like interface to any class. You can customise how this works by setting your own\nsub-class of `GetterDict` as the value of `Config.getter_dict` (see [config](model_config.md)).\n\nYou can also customise class validation using [root_validators](validators.md#root-validators) with `pre=True`. \nIn this case your validator function will be passed a `GetterDict` instance which you may copy and modify.\n\nThe `GetterDict` instance will be called for each field with a sentinel as a fallback (if no other default\nvalue is set). Returning this sentinel means that the field is missing. Any other value will",
+            "score": 0.5818008184432983,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166"
+          },
+          {
+            "release": "v1.10.15",
+            "commit": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",
+            "path": "docs/usage/models.md",
+            "start_line": 84,
+            "end_line": 111,
+            "heading_path": [
+              "Basic model usage",
+              "Model properties"
+            ],
+            "text": "  cf. [helper functions](#helper-functions)\n\n`parse_raw()`\n: a utility for loading strings of numerous formats; cf. [helper functions](#helper-functions)\n\n`parse_file()`\n: like `parse_raw()` but for file paths; cf. [helper functions](#helper-functions)\n\n`from_orm()`\n: loads data into a model from an arbitrary class; cf. [ORM mode](#orm-mode-aka-arbitrary-class-instances)\n\n`schema()`\n: returns a dictionary representing the model as JSON Schema; cf. [schema](schema.md)\n\n`schema_json()`\n: returns a JSON string representation of `schema()`; cf. [schema](schema.md)\n\n`construct()`\n: a class method for creating models without running validation; \n  cf. [Creating models without validation](#creating-models-without-validation)\n\n`__fields_set__`\n: Set of names of fields which were set when the model instance was initialised\n\n`__fields__`\n: a dictionary of the model's fields\n\n`__config__`",
+            "score": 0.5736359357833862,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111"
+          },
+          {
+            "release": "v1.10.15",
+            "commit": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",
+            "path": "docs/usage/models.md",
+            "start_line": 122,
+            "end_line": 134,
+            "heading_path": [
+              "ORM Mode (aka Arbitrary Class Instances)"
+            ],
+            "text": "## ORM Mode (aka Arbitrary Class Instances)\n\nPydantic models can be created from arbitrary class instances to support models that map to ORM objects.\n\nTo do this:\n\n1. The [Config](model_config.md) property `orm_mode` must be set to `True`.\n2. The special constructor `from_orm` must be used to create the model instance.\n\nThe example here uses SQLAlchemy, but the same approach should work for any ORM.\n\n{!.tmp_examples/models_orm_mode.md!}\n",
+            "score": 0.5725875496864319,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134"
+          },
+          {
+            "release": "v1.10.15",
+            "commit": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",
+            "path": "docs/usage/models.md",
+            "start_line": 66,
+            "end_line": 89,
+            "heading_path": [
+              "Basic model usage",
+              "Model properties"
+            ],
+            "text": "### Model properties\n\nThe example above only shows the tip of the iceberg of what models can do. \nModels possess the following methods and attributes:\n\n`dict()`\n: returns a dictionary of the model's fields and values; \n  cf. [exporting models](exporting_models.md#modeldict)\n\n`json()`\n: returns a JSON string representation `dict()`; \n  cf. [exporting models](exporting_models.md#modeljson)\n\n`copy()`\n: returns a copy (by default, shallow copy) of the model; cf. [exporting models](exporting_models.md#modelcopy)\n\n`parse_obj()`\n: a utility for loading any object into a model with error handling if the object is not a dictionary;\n  cf. [helper functions](#helper-functions)\n\n`parse_raw()`\n: a utility for loading strings of numerous formats; cf. [helper functions](#helper-functions)\n\n`parse_file()`",
+            "score": 0.5663796663284302,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L66-L89"
+          },
+          {
+            "release": "v1.10.15",
+            "commit": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",
+            "path": "docs/usage/models.md",
+            "start_line": 347,
+            "end_line": 356,
+            "heading_path": [
+              "Model creation from `NamedTuple` or `TypedDict`"
+            ],
+            "text": "## Model creation from `NamedTuple` or `TypedDict`\n\nSometimes you already use in your application classes that inherit from `NamedTuple` or `TypedDict`\nand you don't want to duplicate all your information to have a `BaseModel`.\nFor this _pydantic_ provides `create_model_from_namedtuple` and `create_model_from_typeddict` methods.\nThose methods have the exact same keyword arguments as `create_model`.\n\n\n{!.tmp_examples/models_from_typeddict.md!}\n",
+            "score": 0.5411199331283569,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L347-L356"
+          }
+        ]
+      }
+    },
+    {
+      "qid": "orm-v2",
+      "query": "\u5982\u4f55\u4ece\u5bf9\u8c61\u5173\u7cfb\u6620\u5c04\u5b9e\u4f8b\u7684\u5c5e\u6027\u6784\u5efa\u6821\u9a8c\u6a21\u578b\u5e76\u8bfb\u53d6\u5bf9\u5e94\u7684\u5b57\u6bb5\uff1f",
+      "version": "v2.7.4",
+      "source_commit": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719",
+      "source_path": "docs/concepts/models.md",
+      "bm25": {
+        "returned": 0,
+        "evidence_ranks": {
+          "241": null,
+          "285": null
+        },
+        "hits": []
+      },
+      "dense": {
+        "returned": 5,
+        "evidence_ranks": {
+          "241": 1,
+          "285": 3
+        },
+        "hits": [
+          {
+            "release": "v2.7.4",
+            "commit": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719",
+            "path": "docs/concepts/models.md",
+            "start_line": 233,
+            "end_line": 261,
+            "heading_path": [
+              "Arbitrary class instances"
+            ],
+            "text": "## Arbitrary class instances\n\n(Formerly known as \"ORM Mode\"/`from_orm`.)\n\nPydantic models can also be created from arbitrary class instances by reading the instance attributes corresponding\nto the model field names. One common application of this functionality is integration with object-relational mappings\n(ORMs).\n\nTo do this, set the config attribute `model_config['from_attributes'] = True`. See\n[Model Config][pydantic.config.ConfigDict.from_attributes] and [ConfigDict][pydantic.config.ConfigDict] for more information.\n\nThe example here uses [SQLAlchemy](https://www.sqlalchemy.org/), but the same approach should work for any ORM.\n\n```py\nfrom typing import List\n\nfrom sqlalchemy import Column, Integer, String\nfrom sqlalchemy.dialects.postgresql import ARRAY\nfrom sqlalchemy.orm import declarative_base\nfrom typing_extensions import Annotated\n\nfrom pydantic import BaseModel, ConfigDict, StringConstraints\n\nBase = declarative_base()\n\n\nclass CompanyOrm(Base):\n    __tablename__ = 'companies'\n",
+            "score": 0.5728853940963745,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261"
+          },
+          {
+            "release": "v2.7.4",
+            "commit": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719",
+            "path": "docs/concepts/models.md",
+            "start_line": 336,
+            "end_line": 378,
+            "heading_path": [
+              "Arbitrary class instances",
+              "Nested attributes"
+            ],
+            "text": "### Nested attributes\n\nWhen using attributes to parse models, model instances will be created from both top-level attributes and\ndeeper-nested attributes as appropriate.\n\nHere is an example demonstrating the principle:\n\n```py\nfrom typing import List\n\nfrom pydantic import BaseModel, ConfigDict\n\n\nclass PetCls:\n    def __init__(self, *, name: str, species: str):\n        self.name = name\n        self.species = species\n\n\nclass PersonCls:\n    def __init__(self, *, name: str, age: float = None, pets: List[PetCls]):\n        self.name = name\n        self.age = age\n        self.pets = pets\n\n\nclass Pet(BaseModel):\n    model_config = ConfigDict(from_attributes=True)\n\n    name: str\n    species: str\n\n\nclass Person(BaseModel):\n    model_config = ConfigDict(from_attributes=True)\n\n    name: str\n    age: float = None\n    pets: List[Pet]\n\n\nbones = PetCls(name='Bones', species='dog')\norion = PetCls(name='Orion', species='cat')",
+            "score": 0.5651698708534241,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L336-L378"
+          },
+          {
+            "release": "v2.7.4",
+            "commit": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719",
+            "path": "docs/concepts/models.md",
+            "start_line": 250,
+            "end_line": 291,
+            "heading_path": [
+              "Arbitrary class instances"
+            ],
+            "text": "from sqlalchemy.dialects.postgresql import ARRAY\nfrom sqlalchemy.orm import declarative_base\nfrom typing_extensions import Annotated\n\nfrom pydantic import BaseModel, ConfigDict, StringConstraints\n\nBase = declarative_base()\n\n\nclass CompanyOrm(Base):\n    __tablename__ = 'companies'\n\n    id = Column(Integer, primary_key=True, nullable=False)\n    public_key = Column(String(20), index=True, nullable=False, unique=True)\n    name = Column(String(63), unique=True)\n    domains = Column(ARRAY(String(255)))\n\n\nclass CompanyModel(BaseModel):\n    model_config = ConfigDict(from_attributes=True)\n\n    id: int\n    public_key: Annotated[str, StringConstraints(max_length=20)]\n    name: Annotated[str, StringConstraints(max_length=63)]\n    domains: List[Annotated[str, StringConstraints(max_length=255)]]\n\n\nco_orm = CompanyOrm(\n    id=123,\n    public_key='foobar',\n    name='Testing',\n    domains=['example.com', 'foobar.com'],\n)\nprint(co_orm)\n#> <__main__.CompanyOrm object at 0x0123456789ab>\nco_model = CompanyModel.model_validate(co_orm)\nprint(co_model)\n\"\"\"\nid=123 public_key='foobar' name='Testing' domains=['example.com', 'foobar.com']\n\"\"\"\n```\n",
+            "score": 0.564056932926178,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L250-L291"
+          },
+          {
+            "release": "v2.7.4",
+            "commit": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719",
+            "path": "docs/concepts/models.md",
+            "start_line": 1644,
+            "end_line": 1678,
+            "heading_path": [
+              "Attribute copies"
+            ],
+            "text": "## Attribute copies\n\nIn many cases, arguments passed to the constructor will be copied in order to perform validation and, where necessary,\ncoercion.\n\nIn this example, note that the ID of the list changes after the class is constructed because it has been\ncopied during validation:\n\n```py\nfrom typing import List\n\nfrom pydantic import BaseModel\n\n\nclass C1:\n    arr = []\n\n    def __init__(self, in_arr):\n        self.arr = in_arr\n\n\nclass C2(BaseModel):\n    arr: List[int]\n\n\narr_orig = [1, 9, 10, 3]\n\n\nc1 = C1(arr_orig)\nc2 = C2(arr=arr_orig)\nprint('id(c1.arr) == id(c2.arr):', id(c1.arr) == id(c2.arr))\n#> id(c1.arr) == id(c2.arr): False\n```\n\n!!! note",
+            "score": 0.5499712228775024,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1644-L1678"
+          },
+          {
+            "release": "v2.7.4",
+            "commit": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719",
+            "path": "docs/concepts/models.md",
+            "start_line": 643,
+            "end_line": 684,
+            "heading_path": [
+              "Generic models"
+            ],
+            "text": "  pydantic models.\n\nHere is an example using a generic `BaseModel` subclass to create an easily-reused HTTP response payload wrapper:\n\n```py\nfrom typing import Generic, List, Optional, TypeVar\n\nfrom pydantic import BaseModel, ValidationError\n\nDataT = TypeVar('DataT')\n\n\nclass DataModel(BaseModel):\n    numbers: List[int]\n    people: List[str]\n\n\nclass Response(BaseModel, Generic[DataT]):\n    data: Optional[DataT] = None\n\n\nprint(Response[int](data=1))\n#> data=1\nprint(Response[str](data='value'))\n#> data='value'\nprint(Response[str](data='value').model_dump())\n#> {'data': 'value'}\n\ndata = DataModel(numbers=[1, 2, 3], people=[])\nprint(Response[DataModel](data=data).model_dump())\n#> {'data': {'numbers': [1, 2, 3], 'people': []}}\ntry:\n    Response[int](data='value')\nexcept ValidationError as e:\n    print(e)\n    \"\"\"\n    1 validation error for Response[int]\n    data\n      Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='value', input_type=str]\n    \"\"\"\n```\n",
+            "score": 0.5417661070823669,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L643-L684"
+          }
+        ]
+      }
+    }
+  ]
+}

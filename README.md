@@ -32,3 +32,29 @@ python -m pytest -q
 ```
 
 Pydantic 原文快照的出处和 SHA-256 见 [语料锁定清单](corpora/pydantic.lock.json)，上游许可见 [Pydantic MIT License](corpora/pydantic/LICENSE)。
+
+## 纯中文检索与 BM25 对照
+
+在 Python 3.11 或更新版本安装可选依赖。首次运行会从 Hugging Face 缓存约 2.3 GB 的固定版本权重。模型下载后，加 `--local-files-only` 可离线运行。
+
+```sh
+python -m pip install -r requirements-dense.txt
+python -m kilokb orm-demo --retriever dense --version v2.7.4 --query "如何从对象关系映射实例的属性构建校验模型并读取对应的字段？"
+python -m kilokb orm-compare --chunk-words 112 --top-k 5 --device cpu
+```
+
+对照使用三条[固定的纯中文问题](evals/pydantic-orm-zh.json)，共四个问题与版本组合。两路都在指定版本内检索相同的 Markdown 切块，并用相同的原文行号检查 Top 5 证据。Dense 使用 BGE-M3 的 CLS 向量，归一化后计算余弦相似度。BM25 保留上面的英文标识符演示，当前分析器只提取拉丁字母和数字词项。 [BGE-M3 官方模型](https://huggingface.co/BAAI/bge-m3/tree/5617a9f61b028005a4858fdac845db406aefb181)
+
+| 检索器 | Top 5 证据齐全的组合 | Top 5 命中的证据锚点 |
+|---|---:|---:|
+| BM25 | 0/4 | 0/8 |
+| BGE-M3 Dense | 3/4 | 7/8 |
+
+针对 v1.10.15 和 v2.7.4 分别提问时，Dense 都找齐了配置和调用方法的证据。同一条通用问题查询两个版本时，v2.7.4 找到配置说明（第 1 名），调用示例（原文第 285 行）未进入 Top 5。这个小样本验证了由中文问题定位英文原文的能力。 [逐题结果、引用与运行环境](reports/pydantic-orm-zh-cpu.json)
+
+下载权重后，在 PowerShell 中运行包含真实模型验收的完整测试。
+
+```powershell
+$env:KILOKB_RUN_MODEL_TESTS = '1'
+python -m pytest -q
+```
