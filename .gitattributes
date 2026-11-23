@@ -1,0 +1,2 @@
+# The pinned snapshots preserve upstream whitespace for checksum verification.
+corpora/pydantic/*.md text eol=lf -whitespace
