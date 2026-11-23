@@ -7,6 +7,7 @@ import sys
 from .bm25 import search_bm25
 from .corpus import load_source, read_lock
 from .markdown import chunk_markdown
+from .rrf import RRF_CANDIDATES, fuse_rrf
 
 
 DEFAULT_QUERY = "Pydantic ORM 迁移时，orm_mode / from_orm 与 from_attributes / model_validate 怎么用？"
@@ -30,10 +31,11 @@ def main() -> None:
     demo = commands.add_parser("orm-demo", help="Retrieve evidence from pinned Pydantic documents")
     demo.add_argument("--query", default=DEFAULT_QUERY)
     demo.add_argument("--version", action="append", choices=releases, help="Repeat to compare versions")
-    demo.add_argument("--retriever", choices=("bm25", "dense"), default="bm25")
+    demo.add_argument("--retriever", choices=("bm25", "dense", "hybrid"), default="bm25")
     add_ranking_options(demo)
     add_model_options(demo)
     compare = commands.add_parser("orm-compare", help="Compare BM25 and BGE-M3 on fixed Chinese questions")
+    compare.add_argument("--hybrid", action="store_true", help="Include RRF and questions with API names")
     add_ranking_options(compare)
     add_model_options(compare)
     options = parser.parse_args()
@@ -49,7 +51,8 @@ def main() -> None:
             from .evaluate import compare_orm
 
             model = BgeM3(options.device, options.local_files_only)
-            result = compare_orm(lock, model, options.chunk_words, options.top_k, options.device)
+            result = compare_orm(lock, model, options.chunk_words, options.top_k,
+                                 options.device, include_hybrid=options.hybrid)
         else:
             result = run_demo(lock, options)
     except (OSError, RuntimeError, ValueError) as exc:
@@ -58,7 +61,7 @@ def main() -> None:
 
 
 def run_demo(lock: dict, options: argparse.Namespace) -> dict:
-    if options.retriever == "dense":
+    if options.retriever != "bm25":
         from .dense import BgeM3, rank_dense
 
         model = BgeM3(options.device, options.local_files_only)
@@ -68,12 +71,21 @@ def run_demo(lock: dict, options: argparse.Namespace) -> dict:
     for release in dict.fromkeys(options.version or lock["releases"]):
         source = load_source(lock, release)
         chunks = chunk_markdown(source.text, options.chunk_words)
-        if options.retriever == "dense":
-            vectors = model.encode([chunk.retrieval_text for chunk in chunks])
-            hits = rank_dense(chunks, vectors, query_vector, options.top_k)
-        else:
+        if options.retriever == "bm25":
             hits = search_bm25(options.query, chunks, options.top_k)
-        results[release] = [source.hit(chunk, score) for chunk, score in hits]
+            results[release] = [source.hit(chunk, score) for chunk, score in hits]
+        else:
+            vectors = model.encode([chunk.retrieval_text for chunk in chunks])
+            if options.retriever == "dense":
+                hits = rank_dense(chunks, vectors, query_vector, options.top_k)
+                results[release] = [source.hit(chunk, score) for chunk, score in hits]
+            else:
+                bm25 = search_bm25(options.query, chunks, RRF_CANDIDATES)
+                dense = rank_dense(chunks, vectors, query_vector, RRF_CANDIDATES)
+                results[release] = [
+                    source.hit(hit.chunk, hit.score, ranks=hit.ranks)
+                    for hit in fuse_rrf(bm25, dense, options.top_k)
+                ]
     return {
         "query": options.query,
         "chunk_words": options.chunk_words,
