@@ -38,18 +38,13 @@ def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def identity(source: Source, chunk: Chunk) -> str:
-    fields = [source.release, source.commit, source.path, chunk.start_line, chunk.end_line]
-    return digest(json.dumps(fields, separators=(",", ":")).encode())
-
-
 def freeze_case(source: Source, qid: str, generation_id: str, hits: list[FusedHit]) -> list[dict]:
     return [
         {
             "qid": qid,
             "release": source.release,
             "generation_id": generation_id,
-            "chunk_id": identity(source, hit.chunk),
+            "chunk_id": source.chunk_id(hit.chunk),
             "input_rank": index,
             "start_line": hit.chunk.start_line,
             "end_line": hit.chunk.end_line,
@@ -76,7 +71,7 @@ def read_rows(path: Path, checksum: str) -> list[dict]:
 def read_case_candidates(
     source: Source, chunks: list[Chunk], rows: list[dict], generation_id: str
 ) -> tuple[FrozenCandidate, ...]:
-    by_id = {identity(source, chunk): chunk for chunk in chunks}
+    by_id = {source.chunk_id(chunk): chunk for chunk in chunks}
     found = set()
     result = []
     for index, row in enumerate(rows, 1):

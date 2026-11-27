@@ -1,5 +1,7 @@
 {
   "repo": "pydantic/pydantic",
+  "default_release": "v2.7.4",
+  "aliases": {"v1": "v1.10.15", "v2": "v2.7.4"},
   "releases": {
     "v1.10.15": {
       "commit": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",

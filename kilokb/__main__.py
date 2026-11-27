@@ -35,6 +35,16 @@ def main() -> None:
     demo.add_argument("--retriever", choices=("bm25", "dense", "hybrid"), default="bm25")
     add_ranking_options(demo)
     add_model_options(demo)
+    from .search import PROFILES
+
+    search = commands.add_parser("search", help="Search one or compare two Pydantic releases")
+    search.add_argument("--query", required=True)
+    search.add_argument("--mode", choices=("single", "compare"), default="single")
+    search.add_argument("--versions", nargs="+", default=())
+    search.add_argument("--top-k", type=int, default=5)
+    search.add_argument("--profile", choices=PROFILES, default="bm25")
+    search.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
+    search.add_argument("--trace", action="store_true", help="Include the retrieval trace in JSON")
     compare = commands.add_parser("orm-compare", help="Compare BM25 and BGE-M3 on fixed Chinese questions")
     compare.add_argument("--hybrid", action="store_true", help="Include RRF and questions with API names")
     add_ranking_options(compare)
@@ -50,7 +60,7 @@ def main() -> None:
     rerank.add_argument("--warmup", type=int, default=10)
     add_model_options(rerank)
     options = parser.parse_args()
-    command = {"orm-demo": demo, "orm-compare": compare,
+    command = {"orm-demo": demo, "orm-compare": compare, "search": search,
                "orm-rerank-freeze": freeze, "orm-rerank": rerank}[options.command]
     for field in ("chunk_words", "top_k", "rounds"):
         if getattr(options, field, 1) < 1:
@@ -61,7 +71,21 @@ def main() -> None:
         demo.error("--query must not be blank")
 
     try:
-        if options.command == "orm-compare":
+        if options.command == "search":
+            from .search import SearchRequest, SearchService
+            from .version_scope import SearchError
+
+            service = SearchService(device=options.device)
+            try:
+                result = service.search(SearchRequest(
+                    query=options.query, mode=options.mode, versions=tuple(options.versions),
+                    top_k=options.top_k, profile=options.profile,
+                ))
+            except SearchError as exc:
+                sys.exit(json.dumps(exc.detail))
+            if options.trace:
+                result["trace"] = service.trace(result["trace_id"])
+        elif options.command == "orm-compare":
             from .dense import BgeM3
             from .evaluate import compare_orm
 
