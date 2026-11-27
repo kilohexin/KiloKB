@@ -14,6 +14,33 @@ python -m kilokb orm-demo --version v1.10.15 --query "ORM 对象怎么用 from_o
 
 默认问题用中文描述迁移需求，并附上四个英文 API 标识符。BM25 按版本独立排序，默认每版返回前 5 条。输出 JSON 中的 `url`、`start_line` 和 `end_line` 对应原文，`score` 可用于查看同版内的排名。
 
+## 版本感知检索接口
+
+同一个检索服务支持 CLI 和 HTTP。单版本请求可指定完整 tag 或 `v1`、`v2` 别名，也可在 query 中写版本。单版本请求未提供版本时默认使用 `v2.7.4`。比较模式解析两个不同版本，`top_k` 对每个版本单独生效。
+
+```sh
+python -m kilokb search --query "V1 orm_mode from_orm 与 V2 from_attributes model_validate" --mode compare --trace
+python -m pip install -r requirements-api.txt
+python -m uvicorn kilokb.api:app --host 127.0.0.1 --port 8000
+```
+
+在本机的 `http://127.0.0.1:8000/docs` 打开交互文档，向 `POST /v1/search` 提交以下请求。
+
+```json
+{
+  "kb_id": "pydantic",
+  "query": "V1 orm_mode from_orm 与 V2 from_attributes model_validate",
+  "mode": "compare",
+  "versions": ["v1.10.15", "v2.7.4"],
+  "top_k": 5,
+  "profile": "bm25"
+}
+```
+
+响应按版本返回证据，并附上固定 commit 的原文链接。未知版本、参数与文本版本冲突、比较模式缺少版本等情况会返回 `422` 和错误代码。当全部、部分或没有版本返回候选时，状态分别为 `complete`、`partial` 或 `insufficient`。置信度阈值将在扩大题集后校准。
+
+用 `GET /v1/traces/{trace_id}` 查看原始请求参数，以及各阶段的候选 ID、名次、耗时和返回数量。每个服务进程保留最近 128 条轨迹。默认 `bm25` 可离线运行。使用 `dense` 或 `hybrid_rrf` 前，按下文准备 BGE-M3 依赖和模型缓存。首次请求对选中的版本计算文档向量，后续请求在同一进程内复用。 [双版本 Hybrid 轨迹样例](reports/pydantic-search-trace.json)
+
 ## 换切块后还能找到原文吗？
 
 同一个问题在两种按词切块设置下均覆盖以下四个原文行锚点。表中列出包含对应证据的最佳排名结果及其原文行区间。

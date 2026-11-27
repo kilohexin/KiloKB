@@ -4,6 +4,7 @@ import hashlib
 import json
 from dataclasses import dataclass
 from pathlib import Path
+from urllib.parse import quote
 
 from .markdown import Chunk
 
@@ -19,8 +20,12 @@ class Source:
     path: str
     text: str
 
+    def chunk_id(self, chunk: Chunk) -> str:
+        fields = [self.release, self.commit, self.path, chunk.start_line, chunk.end_line]
+        return hashlib.sha256(json.dumps(fields, separators=(",", ":")).encode()).hexdigest()
+
     def hit(self, chunk: Chunk, score: float, *, ranks: dict[str, int | None] | None = None) -> dict:
-        root = f"https://github.com/{self.repo}/blob/{self.commit}/{self.path}"
+        root = f"https://github.com/{self.repo}/blob/{self.commit}/{quote(self.path)}"
         result = {
             "release": self.release,
             "commit": self.commit,
