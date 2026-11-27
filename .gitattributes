@@ -1,3 +1,4 @@
 # The pinned snapshots preserve upstream whitespace for checksum verification.
 corpora/pydantic/*.md text eol=lf -whitespace
 evals/*.json text eol=lf
+reports/*.jsonl text eol=lf

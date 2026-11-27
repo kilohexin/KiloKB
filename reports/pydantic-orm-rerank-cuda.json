@@ -1,0 +1,1590 @@
+{
+  "freeze": {
+    "schema": 1,
+    "chunk_words": 112,
+    "dataset_sha256": {
+      "zh": "8545c8cb6c5343250e1f68b7024eb3d02ff8eecd80c3637ea67d30a3cbd9dde9",
+      "api": "115144a1a031118e38575feea83802cc596173931356a3e993d6f30d59d911e2"
+    },
+    "corpus_sha256": {
+      "v1.10.15": "93a04c0e93631d0e7be8910014a3176b07502b4852e5ba606ffa693d7c2a6c21",
+      "v2.7.4": "8cb75405555cae1ea233aab26294e060ea62f71a9d8e011fd46cdc89511425e2"
+    },
+    "source_commits": {
+      "v1.10.15": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",
+      "v2.7.4": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719"
+    },
+    "dense": {
+      "model": "BAAI/bge-m3",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181"
+    },
+    "rrf": {
+      "k": 60,
+      "branch_limit": 40,
+      "pool_size": 30
+    },
+    "generation_id": "5320dea9554836dd0587395a8e7ecd5c46374814c4a0a2c03e6781772b5a6f1d",
+    "candidate_sha256": "30f8442036b054e4ed577bdd7f48689f18d51df45d5341cc53d894fe1e47e3c3",
+    "candidate_count": 240
+  },
+  "source_sha256": {
+    "__init__.py": "d63cb42b9e3f73d15eae15ad0868b491235d088587c886426b93c6141794f4d1",
+    "__main__.py": "a51a9b03afae62a30fe15b5d94b80afc77572b2c5b04408945f121450822916b",
+    "bm25.py": "c9603214e4429ba10350cbd77c81d47e9ff5be1b707c87304dcad0adde0f5356",
+    "corpus.py": "cfe621ae83c5ce14d48a54a90a063774e6d83770571cc2ca9eeee30e22d97342",
+    "dense.py": "6376479ef922c5acfe7d7659c43e205d27c341339e2ce08bade4d903b160cc79",
+    "evaluate.py": "1b798efe1a8d224e9863fde6599cc3a8a42115acff1b7b0d18f2fce0d3bfaa52",
+    "frozen.py": "9c950337c807632fe4167d23ada3855bf3656507f13ae279138b3c65a786c97a",
+    "markdown.py": "bafcb5e5fc03e10042872b070ccbda6725e39996a617104271b5d4ffd86ddfc3",
+    "rerank.py": "dfc176cab73c267eeb60d3df16c6a73964b7027dd53c65575d0b462ccef7b62f",
+    "rerank_experiment.py": "35eb731d77e220fdee0aa973ddc193e6f60d083c1b11fb3b9b87944a233119d1",
+    "rrf.py": "88dfe2e64ca5dbc1437c5140cfc3196315158345effffe1ba320192b821c54bf"
+  },
+  "runtime": {
+    "python": "3.10.20",
+    "platform": "Windows-10-10.0.26100-SP0",
+    "processor": "NVIDIA GeForce RTX 4070 Ti",
+    "torch_threads": 8,
+    "dependencies": {
+      "torch": "2.6.0+cu124",
+      "transformers": "5.4.0",
+      "sentence-transformers": "5.3.0",
+      "huggingface-hub": "1.11.0",
+      "numpy": "2.2.6",
+      "safetensors": "0.7.0"
+    }
+  },
+  "settings": {
+    "device": "cuda",
+    "precision": "float32",
+    "batch_size": 16,
+    "max_tokens": 512,
+    "top_k": 5,
+    "warmup_per_engine": 10,
+    "rounds": 5,
+    "concurrency": 1,
+    "percentile": "median / nearest-rank P95",
+    "latency_scope": "warm frozen-candidate replay. Includes query work, scoring and ranking."
+  },
+  "models": {
+    "cross_encoder": {
+      "id": "BAAI/bge-reranker-v2-m3",
+      "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+      "load_ms": 7846.859699999186
+    },
+    "maxsim": {
+      "id": "BAAI/bge-m3",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "load_ms": 2170.4045000005863,
+      "document_precompute_ms": 1443.0132000015874,
+      "document_count": 85,
+      "raw_vector_bytes": 78581760
+    }
+  },
+  "truncation": {
+    "cross_pairs": {
+      "over_limit": 0,
+      "inputs": 240
+    },
+    "maxsim_queries": {
+      "over_limit": 0,
+      "inputs": 8
+    },
+    "maxsim_unique_documents": {
+      "over_limit": 0,
+      "inputs": 85
+    }
+  },
+  "latency": {
+    "rrf": {
+      "samples": 40,
+      "p50_ms": 0.0005000001692678779,
+      "p95_ms": 0.000700001692166552,
+      "peak_additional_cuda_bytes": 0
+    },
+    "cross_encoder": {
+      "samples": 40,
+      "p50_ms": 400.29149999827496,
+      "p95_ms": 528.2029000009061,
+      "peak_additional_cuda_bytes": 326746112
+    },
+    "maxsim": {
+      "samples": 40,
+      "p50_ms": 11.085499998443993,
+      "p95_ms": 14.489300003333483,
+      "peak_additional_cuda_bytes": 2819072
+    }
+  },
+  "summary": {
+    "rrf": {
+      "all_evidence_cases": 7,
+      "total_cases": 8,
+      "anchors_found": 15,
+      "total_anchors": 16
+    },
+    "cross_encoder": {
+      "all_evidence_cases": 5,
+      "total_cases": 8,
+      "anchors_found": 12,
+      "total_anchors": 16
+    },
+    "maxsim": {
+      "all_evidence_cases": 8,
+      "total_cases": 8,
+      "anchors_found": 16,
+      "total_anchors": 16
+    }
+  },
+  "summary_by_question_set": {
+    "zh": {
+      "rrf": {
+        "all_evidence_cases": 3,
+        "total_cases": 4,
+        "anchors_found": 7,
+        "total_anchors": 8
+      },
+      "cross_encoder": {
+        "all_evidence_cases": 1,
+        "total_cases": 4,
+        "anchors_found": 4,
+        "total_anchors": 8
+      },
+      "maxsim": {
+        "all_evidence_cases": 4,
+        "total_cases": 4,
+        "anchors_found": 8,
+        "total_anchors": 8
+      }
+    },
+    "api": {
+      "rrf": {
+        "all_evidence_cases": 4,
+        "total_cases": 4,
+        "anchors_found": 8,
+        "total_anchors": 8
+      },
+      "cross_encoder": {
+        "all_evidence_cases": 4,
+        "total_cases": 4,
+        "anchors_found": 8,
+        "total_anchors": 8
+      },
+      "maxsim": {
+        "all_evidence_cases": 4,
+        "total_cases": 4,
+        "anchors_found": 8,
+        "total_anchors": 8
+      }
+    }
+  },
+  "cases": [
+    {
+      "qid": "orm-compare",
+      "query": "\u600e\u6837\u4ece\u6570\u636e\u5e93\u6620\u5c04\u5bf9\u8c61\u7684\u5c5e\u6027\u8bfb\u53d6\u6570\u636e\u5e76\u6784\u5efa\u6821\u9a8c\u6a21\u578b\uff1f\u9700\u8981\u5f00\u542f\u4ec0\u4e48\u914d\u7f6e\uff0c\u8c03\u7528\u4ec0\u4e48\u65b9\u6cd5\uff1f",
+      "version": "v1.10.15",
+      "question_set": "zh",
+      "candidate_count": 30,
+      "input_evidence_ranks": {
+        "128": 5,
+        "129": 5
+      },
+      "rrf": {
+        "evidence_ranks": {
+          "128": 5,
+          "129": 5
+        },
+        "hits": [
+          {
+            "chunk_id": "fa98806950b6e72396c6ec69c37c5e0c3595db7c6aa4b558ac4e6a323240d6c4",
+            "input_rank": 1,
+            "start_line": 84,
+            "end_line": 111,
+            "score": 0.01639344262295082,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111"
+          },
+          {
+            "chunk_id": "0798156851b82f0f373535d981b1cc9a13711a646c82be6c4b3a5a6c87f1e495",
+            "input_rank": 2,
+            "start_line": 66,
+            "end_line": 89,
+            "score": 0.016129032258064516,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L66-L89"
+          },
+          {
+            "chunk_id": "54a07c072b1b3d1cdd4948c816915854e31be233a7a6b6437458dd80473d2c9e",
+            "input_rank": 3,
+            "start_line": 155,
+            "end_line": 166,
+            "score": 0.015873015873015872,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166"
+          },
+          {
+            "chunk_id": "55e34089e15fa8eee993586b309329526513e9ebc0d8570549b604cba098665a",
+            "input_rank": 4,
+            "start_line": 21,
+            "end_line": 38,
+            "score": 0.015625,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L21-L38"
+          },
+          {
+            "chunk_id": "423b44d187131c0f78ab5c6ff05907114c2e1a80ca557e8da9641a4d8a33f9bf",
+            "input_rank": 5,
+            "start_line": 122,
+            "end_line": 134,
+            "score": 0.015384615384615385,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134"
+          }
+        ],
+        "latency_ms": [
+          0.0015000005078036338,
+          0.000700001692166552,
+          0.0006999980541877449,
+          0.0005000001692678779,
+          0.0005000001692678779
+        ]
+      },
+      "cross_encoder": {
+        "evidence_ranks": {
+          "128": null,
+          "129": null
+        },
+        "hits": [
+          {
+            "chunk_id": "c1daef401a13ff2a27d75a90846f7e34ea27a10694002a2271468d371795b1c4",
+            "input_rank": 9,
+            "start_line": 1,
+            "end_line": 13,
+            "score": -4.408642292022705,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L1-L13"
+          },
+          {
+            "chunk_id": "fa98806950b6e72396c6ec69c37c5e0c3595db7c6aa4b558ac4e6a323240d6c4",
+            "input_rank": 1,
+            "start_line": 84,
+            "end_line": 111,
+            "score": -4.8698039054870605,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111"
+          },
+          {
+            "chunk_id": "55e34089e15fa8eee993586b309329526513e9ebc0d8570549b604cba098665a",
+            "input_rank": 4,
+            "start_line": 21,
+            "end_line": 38,
+            "score": -4.934694766998291,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L21-L38"
+          },
+          {
+            "chunk_id": "5b0aae3e5bd020748485095f4664e196bfa1a482619bda555b0c91563156f278",
+            "input_rank": 8,
+            "start_line": 34,
+            "end_line": 48,
+            "score": -4.952193737030029,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L34-L48"
+          },
+          {
+            "chunk_id": "0798156851b82f0f373535d981b1cc9a13711a646c82be6c4b3a5a6c87f1e495",
+            "input_rank": 2,
+            "start_line": 66,
+            "end_line": 89,
+            "score": -5.097241401672363,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L66-L89"
+          }
+        ],
+        "latency_ms": [
+          302.31780000030994,
+          338.4077000009711,
+          311.7516999991494,
+          333.0287999997381,
+          300.94649999955436
+        ]
+      },
+      "maxsim": {
+        "evidence_ranks": {
+          "128": 3,
+          "129": 3
+        },
+        "hits": [
+          {
+            "chunk_id": "fa98806950b6e72396c6ec69c37c5e0c3595db7c6aa4b558ac4e6a323240d6c4",
+            "input_rank": 1,
+            "start_line": 84,
+            "end_line": 111,
+            "score": 0.5280023813247681,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111"
+          },
+          {
+            "chunk_id": "54a07c072b1b3d1cdd4948c816915854e31be233a7a6b6437458dd80473d2c9e",
+            "input_rank": 3,
+            "start_line": 155,
+            "end_line": 166,
+            "score": 0.5262104272842407,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166"
+          },
+          {
+            "chunk_id": "423b44d187131c0f78ab5c6ff05907114c2e1a80ca557e8da9641a4d8a33f9bf",
+            "input_rank": 5,
+            "start_line": 122,
+            "end_line": 134,
+            "score": 0.51923006772995,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134"
+          },
+          {
+            "chunk_id": "55e34089e15fa8eee993586b309329526513e9ebc0d8570549b604cba098665a",
+            "input_rank": 4,
+            "start_line": 21,
+            "end_line": 38,
+            "score": 0.5017957091331482,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L21-L38"
+          },
+          {
+            "chunk_id": "ee53f7749cf05b27e7b6d8b1901a640e3df0b14d4162bb598f4d604bbf883d15",
+            "input_rank": 6,
+            "start_line": 227,
+            "end_line": 240,
+            "score": 0.49899211525917053,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L227-L240"
+          }
+        ],
+        "latency_ms": [
+          12.347699997917516,
+          13.446199998725206,
+          11.638799998763716,
+          10.028800003055949,
+          9.80879999769968
+        ]
+      }
+    },
+    {
+      "qid": "orm-compare",
+      "query": "\u600e\u6837\u4ece\u6570\u636e\u5e93\u6620\u5c04\u5bf9\u8c61\u7684\u5c5e\u6027\u8bfb\u53d6\u6570\u636e\u5e76\u6784\u5efa\u6821\u9a8c\u6a21\u578b\uff1f\u9700\u8981\u5f00\u542f\u4ec0\u4e48\u914d\u7f6e\uff0c\u8c03\u7528\u4ec0\u4e48\u65b9\u6cd5\uff1f",
+      "version": "v2.7.4",
+      "question_set": "zh",
+      "candidate_count": 30,
+      "input_evidence_ranks": {
+        "241": 1,
+        "285": 8
+      },
+      "rrf": {
+        "evidence_ranks": {
+          "241": 1,
+          "285": null
+        },
+        "hits": [
+          {
+            "chunk_id": "0f64f8ee78dd158ebb063a7b693f07af2c6f989f707f938b75602f2569c881d0",
+            "input_rank": 1,
+            "start_line": 233,
+            "end_line": 261,
+            "score": 0.01639344262295082,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261"
+          },
+          {
+            "chunk_id": "4fc3438e921a1f29c3d1db7c91e25b7ab19c308d9d742bab872d12bfba596cff",
+            "input_rank": 2,
+            "start_line": 323,
+            "end_line": 335,
+            "score": 0.016129032258064516,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L323-L335"
+          },
+          {
+            "chunk_id": "e7c3b0706aa77878a4051ce835aea58c03cb1afa8da0acc24b19bb3833f22275",
+            "input_rank": 3,
+            "start_line": 487,
+            "end_line": 506,
+            "score": 0.015873015873015872,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L487-L506"
+          },
+          {
+            "chunk_id": "96fa806782e2a5e1981a9f8b3c61e161fd0baaedc5235f031ee86d3d6c08906e",
+            "input_rank": 4,
+            "start_line": 336,
+            "end_line": 378,
+            "score": 0.015625,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L336-L378"
+          },
+          {
+            "chunk_id": "179570b30858a4f276deb65cfaa1a5b9f1c360c3593e5934806eeb1ddc54cfba",
+            "input_rank": 5,
+            "start_line": 133,
+            "end_line": 144,
+            "score": 0.015384615384615385,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L133-L144"
+          }
+        ],
+        "latency_ms": [
+          0.000800002453615889,
+          0.0005000001692678779,
+          0.0006000009307172149,
+          0.0005000001692678779,
+          0.00039999940781854093
+        ]
+      },
+      "cross_encoder": {
+        "evidence_ranks": {
+          "241": 3,
+          "285": null
+        },
+        "hits": [
+          {
+            "chunk_id": "4fc3438e921a1f29c3d1db7c91e25b7ab19c308d9d742bab872d12bfba596cff",
+            "input_rank": 2,
+            "start_line": 323,
+            "end_line": 335,
+            "score": -3.0249924659729004,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L323-L335"
+          },
+          {
+            "chunk_id": "4a725099bae3999c7f59cdd83ae2fee301b3fe3ee3dd4ded947de56bd5201ba6",
+            "input_rank": 27,
+            "start_line": 620,
+            "end_line": 629,
+            "score": -3.5972390174865723,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L620-L629"
+          },
+          {
+            "chunk_id": "0f64f8ee78dd158ebb063a7b693f07af2c6f989f707f938b75602f2569c881d0",
+            "input_rank": 1,
+            "start_line": 233,
+            "end_line": 261,
+            "score": -3.928144693374634,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261"
+          },
+          {
+            "chunk_id": "e7c3b0706aa77878a4051ce835aea58c03cb1afa8da0acc24b19bb3833f22275",
+            "input_rank": 3,
+            "start_line": 487,
+            "end_line": 506,
+            "score": -4.329761028289795,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L487-L506"
+          },
+          {
+            "chunk_id": "c6de194bca509087239ce7fba23706fae72cd1da591d60f70573e1a454ed624c",
+            "input_rank": 29,
+            "start_line": 363,
+            "end_line": 386,
+            "score": -4.355086803436279,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L363-L386"
+          }
+        ],
+        "latency_ms": [
+          436.2617000006139,
+          498.78979999994044,
+          458.7004999993951,
+          428.3051999991585,
+          441.4080999995349
+        ]
+      },
+      "maxsim": {
+        "evidence_ranks": {
+          "241": 1,
+          "285": 2
+        },
+        "hits": [
+          {
+            "chunk_id": "0f64f8ee78dd158ebb063a7b693f07af2c6f989f707f938b75602f2569c881d0",
+            "input_rank": 1,
+            "start_line": 233,
+            "end_line": 261,
+            "score": 0.5546686053276062,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261"
+          },
+          {
+            "chunk_id": "3b1b7964e56efd46d090d613fa2c73a2fe893a30ce44d1526fefba7a5067e83f",
+            "input_rank": 8,
+            "start_line": 250,
+            "end_line": 291,
+            "score": 0.5299987196922302,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L250-L291"
+          },
+          {
+            "chunk_id": "96fa806782e2a5e1981a9f8b3c61e161fd0baaedc5235f031ee86d3d6c08906e",
+            "input_rank": 4,
+            "start_line": 336,
+            "end_line": 378,
+            "score": 0.5246211290359497,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L336-L378"
+          },
+          {
+            "chunk_id": "c0270cf383419a54b803809fe0b12933d7394c9ae4769811c8cf0e07a6ba1dc5",
+            "input_rank": 23,
+            "start_line": 1,
+            "end_line": 13,
+            "score": 0.5217717885971069,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1-L13"
+          },
+          {
+            "chunk_id": "e7c3b0706aa77878a4051ce835aea58c03cb1afa8da0acc24b19bb3833f22275",
+            "input_rank": 3,
+            "start_line": 487,
+            "end_line": 506,
+            "score": 0.5213062167167664,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L487-L506"
+          }
+        ],
+        "latency_ms": [
+          10.071600001538172,
+          9.902100002364023,
+          15.2328000003763,
+          9.844500000326661,
+          14.489300003333483
+        ]
+      }
+    },
+    {
+      "qid": "orm-v1",
+      "query": "\u5982\u4f55\u8ba9\u6570\u636e\u6821\u9a8c\u6a21\u578b\u4ece\u4efb\u610f\u7c7b\u5b9e\u4f8b\u8bfb\u53d6\u5c5e\u6027\u5e76\u521b\u5efa\u6a21\u578b\u5b9e\u4f8b\uff1f",
+      "version": "v1.10.15",
+      "question_set": "zh",
+      "candidate_count": 30,
+      "input_evidence_ranks": {
+        "128": 3,
+        "129": 3
+      },
+      "rrf": {
+        "evidence_ranks": {
+          "128": 3,
+          "129": 3
+        },
+        "hits": [
+          {
+            "chunk_id": "54a07c072b1b3d1cdd4948c816915854e31be233a7a6b6437458dd80473d2c9e",
+            "input_rank": 1,
+            "start_line": 155,
+            "end_line": 166,
+            "score": 0.01639344262295082,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166"
+          },
+          {
+            "chunk_id": "fa98806950b6e72396c6ec69c37c5e0c3595db7c6aa4b558ac4e6a323240d6c4",
+            "input_rank": 2,
+            "start_line": 84,
+            "end_line": 111,
+            "score": 0.016129032258064516,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111"
+          },
+          {
+            "chunk_id": "423b44d187131c0f78ab5c6ff05907114c2e1a80ca557e8da9641a4d8a33f9bf",
+            "input_rank": 3,
+            "start_line": 122,
+            "end_line": 134,
+            "score": 0.015873015873015872,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134"
+          },
+          {
+            "chunk_id": "0798156851b82f0f373535d981b1cc9a13711a646c82be6c4b3a5a6c87f1e495",
+            "input_rank": 4,
+            "start_line": 66,
+            "end_line": 89,
+            "score": 0.015625,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L66-L89"
+          },
+          {
+            "chunk_id": "c9d90570684ce83a89d3680df0e809d41b33a0ed670f3c6e0f9ca8175e6029c3",
+            "input_rank": 5,
+            "start_line": 347,
+            "end_line": 356,
+            "score": 0.015384615384615385,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L347-L356"
+          }
+        ],
+        "latency_ms": [
+          0.000700001692166552,
+          0.0005000001692678779,
+          0.0005000001692678779,
+          0.0005000001692678779,
+          0.0005000001692678779
+        ]
+      },
+      "cross_encoder": {
+        "evidence_ranks": {
+          "128": 1,
+          "129": 1
+        },
+        "hits": [
+          {
+            "chunk_id": "423b44d187131c0f78ab5c6ff05907114c2e1a80ca557e8da9641a4d8a33f9bf",
+            "input_rank": 3,
+            "start_line": 122,
+            "end_line": 134,
+            "score": -1.4325158596038818,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134"
+          },
+          {
+            "chunk_id": "c9d90570684ce83a89d3680df0e809d41b33a0ed670f3c6e0f9ca8175e6029c3",
+            "input_rank": 5,
+            "start_line": 347,
+            "end_line": 356,
+            "score": -2.500699043273926,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L347-L356"
+          },
+          {
+            "chunk_id": "fa98806950b6e72396c6ec69c37c5e0c3595db7c6aa4b558ac4e6a323240d6c4",
+            "input_rank": 2,
+            "start_line": 84,
+            "end_line": 111,
+            "score": -2.998497486114502,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111"
+          },
+          {
+            "chunk_id": "54a07c072b1b3d1cdd4948c816915854e31be233a7a6b6437458dd80473d2c9e",
+            "input_rank": 1,
+            "start_line": 155,
+            "end_line": 166,
+            "score": -3.0020246505737305,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166"
+          },
+          {
+            "chunk_id": "c4b3cbe0a0893aca94c8345e6f9dfc2873aa3afe6326e2fca87cd0b7dcf5e0bf",
+            "input_rank": 12,
+            "start_line": 258,
+            "end_line": 267,
+            "score": -3.5155043601989746,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L258-L267"
+          }
+        ],
+        "latency_ms": [
+          304.13190000035684,
+          320.77620000200113,
+          320.1450000015029,
+          313.18629999805125,
+          301.19980000017677
+        ]
+      },
+      "maxsim": {
+        "evidence_ranks": {
+          "128": 2,
+          "129": 2
+        },
+        "hits": [
+          {
+            "chunk_id": "fa98806950b6e72396c6ec69c37c5e0c3595db7c6aa4b558ac4e6a323240d6c4",
+            "input_rank": 2,
+            "start_line": 84,
+            "end_line": 111,
+            "score": 0.5553097724914551,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111"
+          },
+          {
+            "chunk_id": "423b44d187131c0f78ab5c6ff05907114c2e1a80ca557e8da9641a4d8a33f9bf",
+            "input_rank": 3,
+            "start_line": 122,
+            "end_line": 134,
+            "score": 0.5516805648803711,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134"
+          },
+          {
+            "chunk_id": "54a07c072b1b3d1cdd4948c816915854e31be233a7a6b6437458dd80473d2c9e",
+            "input_rank": 1,
+            "start_line": 155,
+            "end_line": 166,
+            "score": 0.5476921200752258,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166"
+          },
+          {
+            "chunk_id": "c9d90570684ce83a89d3680df0e809d41b33a0ed670f3c6e0f9ca8175e6029c3",
+            "input_rank": 5,
+            "start_line": 347,
+            "end_line": 356,
+            "score": 0.5424111485481262,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L347-L356"
+          },
+          {
+            "chunk_id": "7e0de0a4d91d820eaed83ca824cbc2575e0a58159b09af5d083790e238c3fd1e",
+            "input_rank": 6,
+            "start_line": 499,
+            "end_line": 514,
+            "score": 0.5271032452583313,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L499-L514"
+          }
+        ],
+        "latency_ms": [
+          9.999499998230021,
+          13.023700001213001,
+          12.60779999938677,
+          12.678400002187118,
+          11.093999997683568
+        ]
+      }
+    },
+    {
+      "qid": "orm-v2",
+      "query": "\u5982\u4f55\u4ece\u5bf9\u8c61\u5173\u7cfb\u6620\u5c04\u5b9e\u4f8b\u7684\u5c5e\u6027\u6784\u5efa\u6821\u9a8c\u6a21\u578b\u5e76\u8bfb\u53d6\u5bf9\u5e94\u7684\u5b57\u6bb5\uff1f",
+      "version": "v2.7.4",
+      "question_set": "zh",
+      "candidate_count": 30,
+      "input_evidence_ranks": {
+        "241": 1,
+        "285": 3
+      },
+      "rrf": {
+        "evidence_ranks": {
+          "241": 1,
+          "285": 3
+        },
+        "hits": [
+          {
+            "chunk_id": "0f64f8ee78dd158ebb063a7b693f07af2c6f989f707f938b75602f2569c881d0",
+            "input_rank": 1,
+            "start_line": 233,
+            "end_line": 261,
+            "score": 0.01639344262295082,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261"
+          },
+          {
+            "chunk_id": "96fa806782e2a5e1981a9f8b3c61e161fd0baaedc5235f031ee86d3d6c08906e",
+            "input_rank": 2,
+            "start_line": 336,
+            "end_line": 378,
+            "score": 0.016129032258064516,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L336-L378"
+          },
+          {
+            "chunk_id": "3b1b7964e56efd46d090d613fa2c73a2fe893a30ce44d1526fefba7a5067e83f",
+            "input_rank": 3,
+            "start_line": 250,
+            "end_line": 291,
+            "score": 0.015873015873015872,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L250-L291"
+          },
+          {
+            "chunk_id": "27062c1b3d126ed8261a34ebf3a23b5abc0c4baf9082b2e54e39cf65ec43150a",
+            "input_rank": 4,
+            "start_line": 1644,
+            "end_line": 1678,
+            "score": 0.015625,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1644-L1678"
+          },
+          {
+            "chunk_id": "ae01cc4d9d3ef299e3945d35042ca3b2ab99df4d09f5a5a14c1ebae0e6fc06e3",
+            "input_rank": 5,
+            "start_line": 643,
+            "end_line": 684,
+            "score": 0.015384615384615385,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L643-L684"
+          }
+        ],
+        "latency_ms": [
+          0.0006000009307172149,
+          0.00039999940781854093,
+          0.00039999940781854093,
+          0.0005000001692678779,
+          0.0005000001692678779
+        ]
+      },
+      "cross_encoder": {
+        "evidence_ranks": {
+          "241": 1,
+          "285": null
+        },
+        "hits": [
+          {
+            "chunk_id": "0f64f8ee78dd158ebb063a7b693f07af2c6f989f707f938b75602f2569c881d0",
+            "input_rank": 1,
+            "start_line": 233,
+            "end_line": 261,
+            "score": -0.3644108176231384,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261"
+          },
+          {
+            "chunk_id": "c6de194bca509087239ce7fba23706fae72cd1da591d60f70573e1a454ed624c",
+            "input_rank": 14,
+            "start_line": 363,
+            "end_line": 386,
+            "score": -3.5311050415039062,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L363-L386"
+          },
+          {
+            "chunk_id": "4fc3438e921a1f29c3d1db7c91e25b7ab19c308d9d742bab872d12bfba596cff",
+            "input_rank": 7,
+            "start_line": 323,
+            "end_line": 335,
+            "score": -3.727360725402832,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L323-L335"
+          },
+          {
+            "chunk_id": "93b5232daa7827c1f792ff1b161eff6773cb09f676c4667ef97826cd61863197",
+            "input_rank": 18,
+            "start_line": 53,
+            "end_line": 79,
+            "score": -3.857398271560669,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L53-L79"
+          },
+          {
+            "chunk_id": "f57718d75045a6e5f20676f394d65fe5b4af68d77e09e33945016b7e301df3bb",
+            "input_rank": 12,
+            "start_line": 809,
+            "end_line": 842,
+            "score": -3.9257864952087402,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L809-L842"
+          }
+        ],
+        "latency_ms": [
+          519.3980000003648,
+          593.7138999979652,
+          456.562399998802,
+          443.488900000375,
+          523.8586000014038
+        ]
+      },
+      "maxsim": {
+        "evidence_ranks": {
+          "241": 1,
+          "285": 3
+        },
+        "hits": [
+          {
+            "chunk_id": "0f64f8ee78dd158ebb063a7b693f07af2c6f989f707f938b75602f2569c881d0",
+            "input_rank": 1,
+            "start_line": 233,
+            "end_line": 261,
+            "score": 0.5491701364517212,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261"
+          },
+          {
+            "chunk_id": "96fa806782e2a5e1981a9f8b3c61e161fd0baaedc5235f031ee86d3d6c08906e",
+            "input_rank": 2,
+            "start_line": 336,
+            "end_line": 378,
+            "score": 0.5459688305854797,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L336-L378"
+          },
+          {
+            "chunk_id": "3b1b7964e56efd46d090d613fa2c73a2fe893a30ce44d1526fefba7a5067e83f",
+            "input_rank": 3,
+            "start_line": 250,
+            "end_line": 291,
+            "score": 0.5342271327972412,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L250-L291"
+          },
+          {
+            "chunk_id": "27062c1b3d126ed8261a34ebf3a23b5abc0c4baf9082b2e54e39cf65ec43150a",
+            "input_rank": 4,
+            "start_line": 1644,
+            "end_line": 1678,
+            "score": 0.5268177390098572,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1644-L1678"
+          },
+          {
+            "chunk_id": "ae01cc4d9d3ef299e3945d35042ca3b2ab99df4d09f5a5a14c1ebae0e6fc06e3",
+            "input_rank": 5,
+            "start_line": 643,
+            "end_line": 684,
+            "score": 0.514973521232605,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L643-L684"
+          }
+        ],
+        "latency_ms": [
+          10.617500000080327,
+          11.076999999204418,
+          16.85879999786266,
+          13.028199999098433,
+          9.980900002119597
+        ]
+      }
+    },
+    {
+      "qid": "orm-compare-api",
+      "query": "\u600e\u6837\u4ece\u6570\u636e\u5e93\u6620\u5c04\u5bf9\u8c61\u7684\u5c5e\u6027\u8bfb\u53d6\u6570\u636e\u5e76\u6784\u5efa\u6821\u9a8c\u6a21\u578b\uff1f\u9700\u8981\u5f00\u542f\u4ec0\u4e48\u914d\u7f6e\uff0c\u8c03\u7528\u4ec0\u4e48\u65b9\u6cd5\uff1f\u8bf7\u6bd4\u8f83 orm_mode\u3001from_orm\u3001from_attributes \u4e0e model_validate\u3002",
+      "version": "v1.10.15",
+      "question_set": "api",
+      "candidate_count": 30,
+      "input_evidence_ranks": {
+        "128": 1,
+        "129": 1
+      },
+      "rrf": {
+        "evidence_ranks": {
+          "128": 1,
+          "129": 1
+        },
+        "hits": [
+          {
+            "chunk_id": "423b44d187131c0f78ab5c6ff05907114c2e1a80ca557e8da9641a4d8a33f9bf",
+            "input_rank": 1,
+            "start_line": 122,
+            "end_line": 134,
+            "score": 0.03278688524590164,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134"
+          },
+          {
+            "chunk_id": "fa98806950b6e72396c6ec69c37c5e0c3595db7c6aa4b558ac4e6a323240d6c4",
+            "input_rank": 2,
+            "start_line": 84,
+            "end_line": 111,
+            "score": 0.03200204813108039,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111"
+          },
+          {
+            "chunk_id": "058a30e01b6c6a529aeb6477536c80b3947d213ef91c8dfc70c37b5c19560c5d",
+            "input_rank": 3,
+            "start_line": 146,
+            "end_line": 154,
+            "score": 0.03200204813108039,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L146-L154"
+          },
+          {
+            "chunk_id": "563fda7759f365eaa58911a969d5b868d2bf9dbc967fca027f5e5c312babcbfc",
+            "input_rank": 4,
+            "start_line": 166,
+            "end_line": 171,
+            "score": 0.03125,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L166-L171"
+          },
+          {
+            "chunk_id": "9cfc02f560c5bbee4077f248d0977cfe6a605abe3310afc18800ffb5724f5ab1",
+            "input_rank": 5,
+            "start_line": 135,
+            "end_line": 145,
+            "score": 0.030303030303030304,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L135-L145"
+          }
+        ],
+        "latency_ms": [
+          0.0005000001692678779,
+          0.0005000001692678779,
+          0.0005000001692678779,
+          0.00039999940781854093,
+          0.0005000001692678779
+        ]
+      },
+      "cross_encoder": {
+        "evidence_ranks": {
+          "128": 1,
+          "129": 1
+        },
+        "hits": [
+          {
+            "chunk_id": "423b44d187131c0f78ab5c6ff05907114c2e1a80ca557e8da9641a4d8a33f9bf",
+            "input_rank": 1,
+            "start_line": 122,
+            "end_line": 134,
+            "score": 0.04524073004722595,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134"
+          },
+          {
+            "chunk_id": "fa98806950b6e72396c6ec69c37c5e0c3595db7c6aa4b558ac4e6a323240d6c4",
+            "input_rank": 2,
+            "start_line": 84,
+            "end_line": 111,
+            "score": -0.5728899240493774,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111"
+          },
+          {
+            "chunk_id": "54a07c072b1b3d1cdd4948c816915854e31be233a7a6b6437458dd80473d2c9e",
+            "input_rank": 6,
+            "start_line": 155,
+            "end_line": 166,
+            "score": -1.8137540817260742,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166"
+          },
+          {
+            "chunk_id": "9cfc02f560c5bbee4077f248d0977cfe6a605abe3310afc18800ffb5724f5ab1",
+            "input_rank": 5,
+            "start_line": 135,
+            "end_line": 145,
+            "score": -2.2214579582214355,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L135-L145"
+          },
+          {
+            "chunk_id": "058a30e01b6c6a529aeb6477536c80b3947d213ef91c8dfc70c37b5c19560c5d",
+            "input_rank": 3,
+            "start_line": 146,
+            "end_line": 154,
+            "score": -2.3090391159057617,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L146-L154"
+          }
+        ],
+        "latency_ms": [
+          348.5172999971837,
+          347.65429999970365,
+          329.6278000016173,
+          346.9855999974243,
+          329.7536999998556
+        ]
+      },
+      "maxsim": {
+        "evidence_ranks": {
+          "128": 1,
+          "129": 1
+        },
+        "hits": [
+          {
+            "chunk_id": "423b44d187131c0f78ab5c6ff05907114c2e1a80ca557e8da9641a4d8a33f9bf",
+            "input_rank": 1,
+            "start_line": 122,
+            "end_line": 134,
+            "score": 0.6374247074127197,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134"
+          },
+          {
+            "chunk_id": "fa98806950b6e72396c6ec69c37c5e0c3595db7c6aa4b558ac4e6a323240d6c4",
+            "input_rank": 2,
+            "start_line": 84,
+            "end_line": 111,
+            "score": 0.6171002984046936,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111"
+          },
+          {
+            "chunk_id": "058a30e01b6c6a529aeb6477536c80b3947d213ef91c8dfc70c37b5c19560c5d",
+            "input_rank": 3,
+            "start_line": 146,
+            "end_line": 154,
+            "score": 0.597149133682251,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L146-L154"
+          },
+          {
+            "chunk_id": "563fda7759f365eaa58911a969d5b868d2bf9dbc967fca027f5e5c312babcbfc",
+            "input_rank": 4,
+            "start_line": 166,
+            "end_line": 171,
+            "score": 0.5772463083267212,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L166-L171"
+          },
+          {
+            "chunk_id": "9cfc02f560c5bbee4077f248d0977cfe6a605abe3310afc18800ffb5724f5ab1",
+            "input_rank": 5,
+            "start_line": 135,
+            "end_line": 145,
+            "score": 0.5669277310371399,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L135-L145"
+          }
+        ],
+        "latency_ms": [
+          10.17610000053537,
+          11.52400000137277,
+          13.126699999702396,
+          13.526999999157852,
+          11.60620000155177
+        ]
+      }
+    },
+    {
+      "qid": "orm-compare-api",
+      "query": "\u600e\u6837\u4ece\u6570\u636e\u5e93\u6620\u5c04\u5bf9\u8c61\u7684\u5c5e\u6027\u8bfb\u53d6\u6570\u636e\u5e76\u6784\u5efa\u6821\u9a8c\u6a21\u578b\uff1f\u9700\u8981\u5f00\u542f\u4ec0\u4e48\u914d\u7f6e\uff0c\u8c03\u7528\u4ec0\u4e48\u65b9\u6cd5\uff1f\u8bf7\u6bd4\u8f83 orm_mode\u3001from_orm\u3001from_attributes \u4e0e model_validate\u3002",
+      "version": "v2.7.4",
+      "question_set": "api",
+      "candidate_count": 30,
+      "input_evidence_ranks": {
+        "241": 1,
+        "285": 3
+      },
+      "rrf": {
+        "evidence_ranks": {
+          "241": 1,
+          "285": 3
+        },
+        "hits": [
+          {
+            "chunk_id": "0f64f8ee78dd158ebb063a7b693f07af2c6f989f707f938b75602f2569c881d0",
+            "input_rank": 1,
+            "start_line": 233,
+            "end_line": 261,
+            "score": 0.03278688524590164,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261"
+          },
+          {
+            "chunk_id": "e7c3b0706aa77878a4051ce835aea58c03cb1afa8da0acc24b19bb3833f22275",
+            "input_rank": 2,
+            "start_line": 487,
+            "end_line": 506,
+            "score": 0.030834914611005692,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L487-L506"
+          },
+          {
+            "chunk_id": "3b1b7964e56efd46d090d613fa2c73a2fe893a30ce44d1526fefba7a5067e83f",
+            "input_rank": 3,
+            "start_line": 250,
+            "end_line": 291,
+            "score": 0.03021353930031804,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L250-L291"
+          },
+          {
+            "chunk_id": "25e917b13acd795088e34043af13984f7a3cff2ae125e60f6a31c3f98e483330",
+            "input_rank": 4,
+            "start_line": 427,
+            "end_line": 448,
+            "score": 0.030117753623188408,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L427-L448"
+          },
+          {
+            "chunk_id": "179570b30858a4f276deb65cfaa1a5b9f1c360c3593e5934806eeb1ddc54cfba",
+            "input_rank": 5,
+            "start_line": 133,
+            "end_line": 144,
+            "score": 0.03007688828584351,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L133-L144"
+          }
+        ],
+        "latency_ms": [
+          0.0005000001692678779,
+          0.00039999940781854093,
+          0.00039999940781854093,
+          0.0005000001692678779,
+          0.00039999940781854093
+        ]
+      },
+      "cross_encoder": {
+        "evidence_ranks": {
+          "241": 1,
+          "285": 2
+        },
+        "hits": [
+          {
+            "chunk_id": "0f64f8ee78dd158ebb063a7b693f07af2c6f989f707f938b75602f2569c881d0",
+            "input_rank": 1,
+            "start_line": 233,
+            "end_line": 261,
+            "score": 0.4575258195400238,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261"
+          },
+          {
+            "chunk_id": "3b1b7964e56efd46d090d613fa2c73a2fe893a30ce44d1526fefba7a5067e83f",
+            "input_rank": 3,
+            "start_line": 250,
+            "end_line": 291,
+            "score": -1.7007801532745361,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L250-L291"
+          },
+          {
+            "chunk_id": "e7c3b0706aa77878a4051ce835aea58c03cb1afa8da0acc24b19bb3833f22275",
+            "input_rank": 2,
+            "start_line": 487,
+            "end_line": 506,
+            "score": -1.9985978603363037,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L487-L506"
+          },
+          {
+            "chunk_id": "25e917b13acd795088e34043af13984f7a3cff2ae125e60f6a31c3f98e483330",
+            "input_rank": 4,
+            "start_line": 427,
+            "end_line": 448,
+            "score": -2.3281843662261963,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L427-L448"
+          },
+          {
+            "chunk_id": "4fc3438e921a1f29c3d1db7c91e25b7ab19c308d9d742bab872d12bfba596cff",
+            "input_rank": 13,
+            "start_line": 323,
+            "end_line": 335,
+            "score": -2.5940303802490234,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L323-L335"
+          }
+        ],
+        "latency_ms": [
+          467.3766000014439,
+          529.5072999979311,
+          462.30690000083996,
+          485.65139999845996,
+          528.2029000009061
+        ]
+      },
+      "maxsim": {
+        "evidence_ranks": {
+          "241": 1,
+          "285": 2
+        },
+        "hits": [
+          {
+            "chunk_id": "0f64f8ee78dd158ebb063a7b693f07af2c6f989f707f938b75602f2569c881d0",
+            "input_rank": 1,
+            "start_line": 233,
+            "end_line": 261,
+            "score": 0.6292668581008911,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261"
+          },
+          {
+            "chunk_id": "3b1b7964e56efd46d090d613fa2c73a2fe893a30ce44d1526fefba7a5067e83f",
+            "input_rank": 3,
+            "start_line": 250,
+            "end_line": 291,
+            "score": 0.5564424395561218,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L250-L291"
+          },
+          {
+            "chunk_id": "e7c3b0706aa77878a4051ce835aea58c03cb1afa8da0acc24b19bb3833f22275",
+            "input_rank": 2,
+            "start_line": 487,
+            "end_line": 506,
+            "score": 0.5551576018333435,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L487-L506"
+          },
+          {
+            "chunk_id": "e676647e3a86ea2f004a8f77c6eeec5cb2450abf427b6124c9b75146d7a4cc3b",
+            "input_rank": 8,
+            "start_line": 501,
+            "end_line": 538,
+            "score": 0.5496642589569092,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L501-L538"
+          },
+          {
+            "chunk_id": "96fa806782e2a5e1981a9f8b3c61e161fd0baaedc5235f031ee86d3d6c08906e",
+            "input_rank": 6,
+            "start_line": 336,
+            "end_line": 378,
+            "score": 0.5469986796379089,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L336-L378"
+          }
+        ],
+        "latency_ms": [
+          9.61029999962193,
+          10.378400002082344,
+          10.444799998367671,
+          11.055499999201857,
+          9.887899999739602
+        ]
+      }
+    },
+    {
+      "qid": "orm-v1-api",
+      "query": "\u5982\u4f55\u8ba9\u6570\u636e\u6821\u9a8c\u6a21\u578b\u4ece\u4efb\u610f\u7c7b\u5b9e\u4f8b\u8bfb\u53d6\u5c5e\u6027\u5e76\u521b\u5efa\u6a21\u578b\u5b9e\u4f8b\uff1form_mode \u548c from_orm \u5206\u522b\u600e\u4e48\u7528\uff1f",
+      "version": "v1.10.15",
+      "question_set": "api",
+      "candidate_count": 30,
+      "input_evidence_ranks": {
+        "128": 1,
+        "129": 1
+      },
+      "rrf": {
+        "evidence_ranks": {
+          "128": 1,
+          "129": 1
+        },
+        "hits": [
+          {
+            "chunk_id": "423b44d187131c0f78ab5c6ff05907114c2e1a80ca557e8da9641a4d8a33f9bf",
+            "input_rank": 1,
+            "start_line": 122,
+            "end_line": 134,
+            "score": 0.03278688524590164,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134"
+          },
+          {
+            "chunk_id": "058a30e01b6c6a529aeb6477536c80b3947d213ef91c8dfc70c37b5c19560c5d",
+            "input_rank": 2,
+            "start_line": 146,
+            "end_line": 154,
+            "score": 0.03225806451612903,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L146-L154"
+          },
+          {
+            "chunk_id": "fa98806950b6e72396c6ec69c37c5e0c3595db7c6aa4b558ac4e6a323240d6c4",
+            "input_rank": 3,
+            "start_line": 84,
+            "end_line": 111,
+            "score": 0.031746031746031744,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111"
+          },
+          {
+            "chunk_id": "563fda7759f365eaa58911a969d5b868d2bf9dbc967fca027f5e5c312babcbfc",
+            "input_rank": 4,
+            "start_line": 166,
+            "end_line": 171,
+            "score": 0.031009615384615385,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L166-L171"
+          },
+          {
+            "chunk_id": "54a07c072b1b3d1cdd4948c816915854e31be233a7a6b6437458dd80473d2c9e",
+            "input_rank": 5,
+            "start_line": 155,
+            "end_line": 166,
+            "score": 0.030776515151515152,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166"
+          }
+        ],
+        "latency_ms": [
+          0.00039999940781854093,
+          0.0005000001692678779,
+          0.0005000001692678779,
+          0.0005000001692678779,
+          0.0005000001692678779
+        ]
+      },
+      "cross_encoder": {
+        "evidence_ranks": {
+          "128": 1,
+          "129": 1
+        },
+        "hits": [
+          {
+            "chunk_id": "423b44d187131c0f78ab5c6ff05907114c2e1a80ca557e8da9641a4d8a33f9bf",
+            "input_rank": 1,
+            "start_line": 122,
+            "end_line": 134,
+            "score": 5.116419315338135,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134"
+          },
+          {
+            "chunk_id": "058a30e01b6c6a529aeb6477536c80b3947d213ef91c8dfc70c37b5c19560c5d",
+            "input_rank": 2,
+            "start_line": 146,
+            "end_line": 154,
+            "score": 1.372765064239502,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L146-L154"
+          },
+          {
+            "chunk_id": "fa98806950b6e72396c6ec69c37c5e0c3595db7c6aa4b558ac4e6a323240d6c4",
+            "input_rank": 3,
+            "start_line": 84,
+            "end_line": 111,
+            "score": 1.1171252727508545,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111"
+          },
+          {
+            "chunk_id": "54a07c072b1b3d1cdd4948c816915854e31be233a7a6b6437458dd80473d2c9e",
+            "input_rank": 5,
+            "start_line": 155,
+            "end_line": 166,
+            "score": 0.31496337056159973,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166"
+          },
+          {
+            "chunk_id": "563fda7759f365eaa58911a969d5b868d2bf9dbc967fca027f5e5c312babcbfc",
+            "input_rank": 4,
+            "start_line": 166,
+            "end_line": 171,
+            "score": 0.09569265693426132,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L166-L171"
+          }
+        ],
+        "latency_ms": [
+          319.0320000030624,
+          327.8957000002265,
+          329.9729999998817,
+          328.1545999998343,
+          372.2777999973914
+        ]
+      },
+      "maxsim": {
+        "evidence_ranks": {
+          "128": 1,
+          "129": 1
+        },
+        "hits": [
+          {
+            "chunk_id": "423b44d187131c0f78ab5c6ff05907114c2e1a80ca557e8da9641a4d8a33f9bf",
+            "input_rank": 1,
+            "start_line": 122,
+            "end_line": 134,
+            "score": 0.6660128831863403,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134"
+          },
+          {
+            "chunk_id": "058a30e01b6c6a529aeb6477536c80b3947d213ef91c8dfc70c37b5c19560c5d",
+            "input_rank": 2,
+            "start_line": 146,
+            "end_line": 154,
+            "score": 0.634256899356842,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L146-L154"
+          },
+          {
+            "chunk_id": "fa98806950b6e72396c6ec69c37c5e0c3595db7c6aa4b558ac4e6a323240d6c4",
+            "input_rank": 3,
+            "start_line": 84,
+            "end_line": 111,
+            "score": 0.6074420213699341,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111"
+          },
+          {
+            "chunk_id": "54a07c072b1b3d1cdd4948c816915854e31be233a7a6b6437458dd80473d2c9e",
+            "input_rank": 5,
+            "start_line": 155,
+            "end_line": 166,
+            "score": 0.5893218517303467,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166"
+          },
+          {
+            "chunk_id": "563fda7759f365eaa58911a969d5b868d2bf9dbc967fca027f5e5c312babcbfc",
+            "input_rank": 4,
+            "start_line": 166,
+            "end_line": 171,
+            "score": 0.5789929032325745,
+            "url": "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L166-L171"
+          }
+        ],
+        "latency_ms": [
+          12.628000000404427,
+          10.641100001521409,
+          12.915800001792377,
+          11.048000000300817,
+          9.742599999299273
+        ]
+      }
+    },
+    {
+      "qid": "orm-v2-api",
+      "query": "\u5982\u4f55\u4ece\u5bf9\u8c61\u5173\u7cfb\u6620\u5c04\u5b9e\u4f8b\u7684\u5c5e\u6027\u6784\u5efa\u6821\u9a8c\u6a21\u578b\u5e76\u8bfb\u53d6\u5bf9\u5e94\u7684\u5b57\u6bb5\uff1fCompanyModel.model_validate \u548c from_attributes \u5982\u4f55\u914d\u5408\uff1f",
+      "version": "v2.7.4",
+      "question_set": "api",
+      "candidate_count": 30,
+      "input_evidence_ranks": {
+        "241": 3,
+        "285": 1
+      },
+      "rrf": {
+        "evidence_ranks": {
+          "241": 3,
+          "285": 1
+        },
+        "hits": [
+          {
+            "chunk_id": "3b1b7964e56efd46d090d613fa2c73a2fe893a30ce44d1526fefba7a5067e83f",
+            "input_rank": 1,
+            "start_line": 250,
+            "end_line": 291,
+            "score": 0.032266458495966696,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L250-L291"
+          },
+          {
+            "chunk_id": "96fa806782e2a5e1981a9f8b3c61e161fd0baaedc5235f031ee86d3d6c08906e",
+            "input_rank": 2,
+            "start_line": 336,
+            "end_line": 378,
+            "score": 0.03200204813108039,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L336-L378"
+          },
+          {
+            "chunk_id": "0f64f8ee78dd158ebb063a7b693f07af2c6f989f707f938b75602f2569c881d0",
+            "input_rank": 3,
+            "start_line": 233,
+            "end_line": 261,
+            "score": 0.03177805800756621,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261"
+          },
+          {
+            "chunk_id": "25e917b13acd795088e34043af13984f7a3cff2ae125e60f6a31c3f98e483330",
+            "input_rank": 4,
+            "start_line": 427,
+            "end_line": 448,
+            "score": 0.030117753623188408,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L427-L448"
+          },
+          {
+            "chunk_id": "e7c3b0706aa77878a4051ce835aea58c03cb1afa8da0acc24b19bb3833f22275",
+            "input_rank": 5,
+            "start_line": 487,
+            "end_line": 506,
+            "score": 0.029631255487269532,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L487-L506"
+          }
+        ],
+        "latency_ms": [
+          0.0006000009307172149,
+          0.0005000001692678779,
+          0.0005000001692678779,
+          0.0005000001692678779,
+          0.0005000001692678779
+        ]
+      },
+      "cross_encoder": {
+        "evidence_ranks": {
+          "241": 1,
+          "285": 2
+        },
+        "hits": [
+          {
+            "chunk_id": "0f64f8ee78dd158ebb063a7b693f07af2c6f989f707f938b75602f2569c881d0",
+            "input_rank": 3,
+            "start_line": 233,
+            "end_line": 261,
+            "score": 1.8925371170043945,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261"
+          },
+          {
+            "chunk_id": "3b1b7964e56efd46d090d613fa2c73a2fe893a30ce44d1526fefba7a5067e83f",
+            "input_rank": 1,
+            "start_line": 250,
+            "end_line": 291,
+            "score": 0.8646112680435181,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L250-L291"
+          },
+          {
+            "chunk_id": "c6de194bca509087239ce7fba23706fae72cd1da591d60f70573e1a454ed624c",
+            "input_rank": 7,
+            "start_line": 363,
+            "end_line": 386,
+            "score": -0.7390501499176025,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L363-L386"
+          },
+          {
+            "chunk_id": "96fa806782e2a5e1981a9f8b3c61e161fd0baaedc5235f031ee86d3d6c08906e",
+            "input_rank": 2,
+            "start_line": 336,
+            "end_line": 378,
+            "score": -1.6597775220870972,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L336-L378"
+          },
+          {
+            "chunk_id": "e7c3b0706aa77878a4051ce835aea58c03cb1afa8da0acc24b19bb3833f22275",
+            "input_rank": 5,
+            "start_line": 487,
+            "end_line": 506,
+            "score": -1.8029431104660034,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L487-L506"
+          }
+        ],
+        "latency_ms": [
+          464.1020999988541,
+          467.62220000164234,
+          464.8938000027556,
+          452.1703999998863,
+          512.1902999999293
+        ]
+      },
+      "maxsim": {
+        "evidence_ranks": {
+          "241": 1,
+          "285": 2
+        },
+        "hits": [
+          {
+            "chunk_id": "0f64f8ee78dd158ebb063a7b693f07af2c6f989f707f938b75602f2569c881d0",
+            "input_rank": 3,
+            "start_line": 233,
+            "end_line": 261,
+            "score": 0.5988370180130005,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261"
+          },
+          {
+            "chunk_id": "3b1b7964e56efd46d090d613fa2c73a2fe893a30ce44d1526fefba7a5067e83f",
+            "input_rank": 1,
+            "start_line": 250,
+            "end_line": 291,
+            "score": 0.591234564781189,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L250-L291"
+          },
+          {
+            "chunk_id": "96fa806782e2a5e1981a9f8b3c61e161fd0baaedc5235f031ee86d3d6c08906e",
+            "input_rank": 2,
+            "start_line": 336,
+            "end_line": 378,
+            "score": 0.5701422095298767,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L336-L378"
+          },
+          {
+            "chunk_id": "27062c1b3d126ed8261a34ebf3a23b5abc0c4baf9082b2e54e39cf65ec43150a",
+            "input_rank": 24,
+            "start_line": 1644,
+            "end_line": 1678,
+            "score": 0.5640742778778076,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1644-L1678"
+          },
+          {
+            "chunk_id": "9d7627ceab088254ebcf445bf2e3cf9a54f997cc0f3847fd6dca142ea92ca814",
+            "input_rank": 16,
+            "start_line": 1042,
+            "end_line": 1082,
+            "score": 0.5443257689476013,
+            "url": "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1042-L1082"
+          }
+        ],
+        "latency_ms": [
+          13.32650000040303,
+          12.492399997427128,
+          11.876099997607525,
+          10.223299999779556,
+          10.19780000206083
+        ]
+      }
+    }
+  ]
+}
