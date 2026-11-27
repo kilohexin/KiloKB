@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "profile": "hybrid_rrf",
+  "top_k": 5,
+  "score": "max_dense_cosine_in_top_k",
+  "threshold": 0.544103,
+  "generation_id": "f7fbd98dfc2e71eccbd19df997bf03c3ddfb62c11dad613e71fcd187a789d338",
+  "contract": {
+    "chunk_words": 112,
+    "dense_model": "BAAI/bge-m3",
+    "dense_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "dense_max_tokens": 512,
+    "rrf_k": 60,
+    "branch_limit": 40,
+    "rrf_pool": 30,
+    "score_decimals": 6
+  },
+  "dataset_sha256": "b70a8832ef3ac450383b549d0ab38971bdec3a9dde461c8bcb3230e92b4667c8",
+  "fitted_on": "dev",
+  "dev_false_reject_limit": 0.1
+}

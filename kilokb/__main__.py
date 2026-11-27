@@ -45,6 +45,7 @@ def main() -> None:
     search.add_argument("--profile", choices=PROFILES, default="bm25")
     search.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
     search.add_argument("--trace", action="store_true", help="Include the retrieval trace in JSON")
+    search.add_argument("--abstain", action="store_true", help="Use the calibrated evidence policy")
     compare = commands.add_parser("orm-compare", help="Compare BM25 and BGE-M3 on fixed Chinese questions")
     compare.add_argument("--hybrid", action="store_true", help="Include RRF and questions with API names")
     add_ranking_options(compare)
@@ -59,9 +60,13 @@ def main() -> None:
     rerank.add_argument("--rounds", type=int, default=5)
     rerank.add_argument("--warmup", type=int, default=10)
     add_model_options(rerank)
+    confidence = commands.add_parser("confidence-eval", help="Calibrate on dev and evaluate on held-out families")
+    confidence.add_argument("--policy-out", type=Path)
+    add_model_options(confidence)
     options = parser.parse_args()
     command = {"orm-demo": demo, "orm-compare": compare, "search": search,
-               "orm-rerank-freeze": freeze, "orm-rerank": rerank}[options.command]
+               "orm-rerank-freeze": freeze, "orm-rerank": rerank,
+               "confidence-eval": confidence}[options.command]
     for field in ("chunk_words", "top_k", "rounds"):
         if getattr(options, field, 1) < 1:
             command.error(f"--{field.replace('_', '-')} must be positive")
@@ -79,7 +84,7 @@ def main() -> None:
             try:
                 result = service.search(SearchRequest(
                     query=options.query, mode=options.mode, versions=tuple(options.versions),
-                    top_k=options.top_k, profile=options.profile,
+                    top_k=options.top_k, profile=options.profile, abstain=options.abstain,
                 ))
             except SearchError as exc:
                 sys.exit(json.dumps(exc.detail))
@@ -107,6 +112,12 @@ def main() -> None:
                 manifest, cases, options.device, options.local_files_only,
                 options.top_k, options.warmup, options.rounds,
             )
+        elif options.command == "confidence-eval":
+            from .confidence_eval import DATASET, run_evaluation
+
+            result = run_evaluation(DATASET, options.device, options.local_files_only)
+            if options.policy_out:
+                options.policy_out.write_bytes((json.dumps(result["policy"], indent=2) + "\n").encode())
         else:
             result = run_demo(lock, options)
     except (OSError, RuntimeError, ValueError) as exc:
