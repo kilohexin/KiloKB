@@ -17,6 +17,7 @@ class SearchBody(BaseModel):
     top_k: int = Field(5, ge=1, le=MAX_TOP_K, strict=True)
     profile: Literal["bm25", "dense", "hybrid_rrf"] = "bm25"
     kb_id: str = "pydantic"
+    abstain: bool = Field(False, strict=True)
 
 
 def create_app() -> FastAPI:

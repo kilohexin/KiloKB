@@ -1,0 +1,1781 @@
+{
+  "dataset": "pydantic-confidence.json",
+  "policy": {
+    "schema": 1,
+    "profile": "hybrid_rrf",
+    "top_k": 5,
+    "score": "max_dense_cosine_in_top_k",
+    "threshold": 0.544103,
+    "generation_id": "f7fbd98dfc2e71eccbd19df997bf03c3ddfb62c11dad613e71fcd187a789d338",
+    "contract": {
+      "chunk_words": 112,
+      "dense_model": "BAAI/bge-m3",
+      "dense_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "dense_max_tokens": 512,
+      "rrf_k": 60,
+      "branch_limit": 40,
+      "rrf_pool": 30,
+      "score_decimals": 6
+    },
+    "dataset_sha256": "b70a8832ef3ac450383b549d0ab38971bdec3a9dde461c8bcb3230e92b4667c8",
+    "fitted_on": "dev",
+    "dev_false_reject_limit": 0.1
+  },
+  "runtime": {
+    "python": "3.10.20",
+    "platform": "Windows-10-10.0.26100-SP0",
+    "processor": "NVIDIA GeForce RTX 4070 Ti",
+    "torch_threads": 8,
+    "dependencies": {
+      "torch": "2.6.0+cu124",
+      "transformers": "5.4.0",
+      "sentence-transformers": "5.3.0",
+      "huggingface-hub": "1.11.0",
+      "numpy": "2.2.6",
+      "safetensors": "0.7.0"
+    }
+  },
+  "device": "cuda",
+  "source_sha256": {
+    "__init__.py": "d63cb42b9e3f73d15eae15ad0868b491235d088587c886426b93c6141794f4d1",
+    "__main__.py": "282c56c10e3711d65b7ad4ce7dfdc11878dc66f74d99a65ad259d52a74ffc2ba",
+    "api.py": "975e733a08b0dccc13b2e61bd7b7edcc06f1700a3615cfe41a5b52901fbffa1b",
+    "bm25.py": "c9603214e4429ba10350cbd77c81d47e9ff5be1b707c87304dcad0adde0f5356",
+    "confidence.py": "a15f389c88c5ff88b6cef608ffcbdfbfcf63891ab509f721641819ed91df1e6d",
+    "confidence_eval.py": "37aeef092a0538ebd29e010bad6cba5ec747c75968af146b467890e61be0cb26",
+    "corpus.py": "e4c6125db6ac97d476df5cbc291913252dba29ae0055bdda9a509c47fa053459",
+    "dense.py": "6376479ef922c5acfe7d7659c43e205d27c341339e2ce08bade4d903b160cc79",
+    "evaluate.py": "1b798efe1a8d224e9863fde6599cc3a8a42115acff1b7b0d18f2fce0d3bfaa52",
+    "frozen.py": "6ac207819c1e81fb6f434ab1a7fde7507fefd901ee1a1656e8063255c50292ca",
+    "markdown.py": "bafcb5e5fc03e10042872b070ccbda6725e39996a617104271b5d4ffd86ddfc3",
+    "rerank.py": "dfc176cab73c267eeb60d3df16c6a73964b7027dd53c65575d0b462ccef7b62f",
+    "rerank_experiment.py": "35eb731d77e220fdee0aa973ddc193e6f60d083c1b11fb3b9b87944a233119d1",
+    "rrf.py": "88dfe2e64ca5dbc1437c5140cfc3196315158345effffe1ba320192b821c54bf",
+    "search.py": "0563838b812512cdcaf00bb6c7eb8bc80d1c736b7681a6356bb12d831c1400b1",
+    "version_scope.py": "d072da2aab49d11953f5b66963bcc4bb9815807c10001e5c0afa7c0a4fa816dd"
+  },
+  "splits": {
+    "dev": {
+      "questions": 30,
+      "resolved_sides": 40,
+      "version_conflicts_rejected": [
+        "confidence-d05",
+        "confidence-d09",
+        "confidence-d26"
+      ],
+      "baseline": {
+        "false_accept": {
+          "count": 15,
+          "total": 15,
+          "rate": 1.0
+        },
+        "false_reject": {
+          "count": 0,
+          "total": 25,
+          "rate": 0.0
+        },
+        "accepted_answerable_missing_gold": {
+          "count": 4,
+          "total": 25,
+          "rate": 0.16
+        }
+      },
+      "calibrated": {
+        "false_accept": {
+          "count": 9,
+          "total": 15,
+          "rate": 0.6
+        },
+        "false_reject": {
+          "count": 2,
+          "total": 25,
+          "rate": 0.08
+        },
+        "accepted_answerable_missing_gold": {
+          "count": 4,
+          "total": 23,
+          "rate": 0.17391304347826086
+        }
+      },
+      "observations": [
+        {
+          "qid": "confidence-d01",
+          "family": "orm_attributes",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.701362,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            128,
+            129
+          ],
+          "found_lines": [
+            128,
+            129
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L551-L559",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L323-L340",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L499-L514"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d02",
+          "family": "orm_attributes",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.642162,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            241,
+            285
+          ],
+          "found_lines": [
+            241,
+            285
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L292-L333",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1388-L1406",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L250-L291",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1278-L1301"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d03",
+          "family": "orm_attributes",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.541799,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            128,
+            129
+          ],
+          "found_lines": [
+            128,
+            129
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L1-L13",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L66-L89",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L258-L267"
+          ],
+          "accepted": false
+        },
+        {
+          "qid": "confidence-d03",
+          "family": "orm_attributes",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.557149,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [
+            241,
+            285
+          ],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1-L13",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1086-L1115",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L487-L506",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1666-L1682",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L336-L378"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d04",
+          "family": "orm_attributes",
+          "release": "v1.10.15",
+          "answerable": false,
+          "score": 0.651261,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L135-L145",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L1-L13",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L347-L356"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d04",
+          "family": "orm_attributes",
+          "release": "v2.7.4",
+          "answerable": false,
+          "score": 0.679556,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L292-L333",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L427-L448",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L487-L506",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L250-L291"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d06",
+          "family": "validation_helpers",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.676882,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            231,
+            232,
+            233,
+            234,
+            235,
+            236
+          ],
+          "found_lines": [
+            231,
+            232,
+            233,
+            234,
+            235,
+            236
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L227-L240",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L499-L514",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L357-L370",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d07",
+          "family": "validation_helpers",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.714498,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            431,
+            432,
+            433,
+            434
+          ],
+          "found_lines": [
+            431,
+            432,
+            433,
+            434
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L487-L506",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L427-L448",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L468-L491",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L133-L144",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L124-L134"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d08",
+          "family": "validation_helpers",
+          "release": "v1.10.15",
+          "answerable": false,
+          "score": 0.578115,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L227-L240",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L66-L89",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L499-L514",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L185-L208"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d08",
+          "family": "validation_helpers",
+          "release": "v2.7.4",
+          "answerable": false,
+          "score": 0.599732,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L487-L506",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L468-L491",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L427-L448",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L133-L144",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L49-L52"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d10",
+          "family": "unvalidated_construction",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.662388,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            251,
+            252,
+            256,
+            257
+          ],
+          "found_lines": [
+            251,
+            252,
+            256,
+            257
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L249-L261",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L551-L559",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L11-L20",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L499-L514"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d11",
+          "family": "unvalidated_construction",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.670533,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [
+            550,
+            563,
+            564
+          ],
+          "found_lines": [
+            563,
+            564
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L558-L579",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L620-L629",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L611-L620",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L594-L614",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L220-L232"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d12",
+          "family": "unvalidated_construction",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.604747,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            603,
+            604,
+            605
+          ],
+          "found_lines": [
+            603,
+            604,
+            605
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L594-L614",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L565-L602",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L113-L127",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L628-L632",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1683-L1722"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d12",
+          "family": "unvalidated_construction",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.666654,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            261,
+            262,
+            263
+          ],
+          "found_lines": [
+            261,
+            262,
+            263
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L258-L267",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L249-L261",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L104-L113",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L409-L424"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d13",
+          "family": "unvalidated_construction",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.623309,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            615,
+            616,
+            617,
+            618
+          ],
+          "found_lines": [
+            615,
+            616,
+            617,
+            618
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L611-L620",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L594-L614",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L548-L559",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L558-L579",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L620-L629"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d14",
+          "family": "unvalidated_construction",
+          "release": "v1.10.15",
+          "answerable": false,
+          "score": 0.491481,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L249-L261",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L66-L89",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L258-L267",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L323-L340"
+          ],
+          "accepted": false
+        },
+        {
+          "qid": "confidence-d14",
+          "family": "unvalidated_construction",
+          "release": "v2.7.4",
+          "answerable": false,
+          "score": 0.496985,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L558-L579",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L594-L614",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L620-L629",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L611-L620",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L113-L127"
+          ],
+          "accepted": false
+        },
+        {
+          "qid": "confidence-d15",
+          "family": "generic_models",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.663524,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            274,
+            275,
+            276,
+            277,
+            278
+          ],
+          "found_lines": [
+            274,
+            275,
+            276,
+            277,
+            278
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L306-L322",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L268-L283",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L290-L312",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L551-L559",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L278-L292"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d16",
+          "family": "generic_models",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.650772,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            639,
+            640,
+            641,
+            642,
+            643
+          ],
+          "found_lines": [
+            639,
+            640,
+            641,
+            642,
+            643
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L633-L649",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L981-L1015",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L809-L842",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L948-L984",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L690-L720"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d17",
+          "family": "generic_models",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.53025,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            292,
+            293
+          ],
+          "found_lines": [
+            292,
+            293
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L278-L292",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L290-L312",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L146-L154",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L66-L89"
+          ],
+          "accepted": false
+        },
+        {
+          "qid": "confidence-d17",
+          "family": "generic_models",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.544103,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            693,
+            694
+          ],
+          "found_lines": [
+            693,
+            694
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L690-L720",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L220-L232",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L913-L956",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L948-L984",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L336-L378"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d18",
+          "family": "generic_models",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.645161,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [
+            850,
+            851
+          ],
+          "found_lines": [
+            851
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L851-L884",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L897-L928",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L948-L984",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L981-L1015",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L809-L842"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d19",
+          "family": "generic_models",
+          "release": "v1.10.15",
+          "answerable": false,
+          "score": 0.441017,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L146-L154",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L185-L208",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L114-L121"
+          ],
+          "accepted": false
+        },
+        {
+          "qid": "confidence-d19",
+          "family": "generic_models",
+          "release": "v2.7.4",
+          "answerable": false,
+          "score": 0.475914,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L913-L956",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L323-L335",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L363-L386",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1002-L1046",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L145-L185"
+          ],
+          "accepted": false
+        },
+        {
+          "qid": "confidence-d20",
+          "family": "dynamic_models",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.566103,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            325,
+            326,
+            338,
+            339,
+            343
+          ],
+          "found_lines": [
+            325,
+            326,
+            338,
+            339,
+            343
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L338-L346",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L227-L240",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L258-L267",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L323-L340"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d20",
+          "family": "dynamic_models",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.572418,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [
+            1091,
+            1092,
+            1127,
+            1128,
+            1151
+          ],
+          "found_lines": [
+            1127,
+            1128,
+            1151
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1110-L1147",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1644-L1678",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L250-L291",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1615-L1643",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1131-L1185"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d21",
+          "family": "dynamic_models",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.764972,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            349,
+            350,
+            351,
+            352
+          ],
+          "found_lines": [
+            349,
+            350,
+            351,
+            352
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L347-L356",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L551-L559",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L323-L340",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L499-L514",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d22",
+          "family": "dynamic_models",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.596302,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            1186,
+            1188,
+            1189
+          ],
+          "found_lines": [
+            1186,
+            1188,
+            1189
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1172-L1190",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1278-L1301",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L220-L232",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L558-L579",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L548-L559"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d23",
+          "family": "dynamic_models",
+          "release": "v1.10.15",
+          "answerable": false,
+          "score": 0.585578,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L347-L356",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L290-L312",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L323-L340",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L278-L292",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L268-L283"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d23",
+          "family": "dynamic_models",
+          "release": "v2.7.4",
+          "answerable": false,
+          "score": 0.565019,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1086-L1115",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L633-L649",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L427-L448",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1131-L1185",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1590-L1611"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d24",
+          "family": "schema_rebuild",
+          "release": "v1.10.15",
+          "answerable": false,
+          "score": 0.556819,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L66-L89",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L323-L340",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L268-L283",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L484-L498",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L104-L113"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d24",
+          "family": "schema_rebuild",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.663941,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            229,
+            230,
+            231
+          ],
+          "found_lines": [
+            229,
+            230,
+            231
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L220-L232",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L186-L226",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L124-L134",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L133-L144",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L113-L127"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d25",
+          "family": "schema_rebuild",
+          "release": "v1.10.15",
+          "answerable": false,
+          "score": 0.416367,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L431-L442",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L409-L424",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L468-L478",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L459-L476"
+          ],
+          "accepted": false
+        },
+        {
+          "qid": "confidence-d25",
+          "family": "schema_rebuild",
+          "release": "v2.7.4",
+          "answerable": false,
+          "score": 0.543706,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L186-L226",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L220-L232",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1-L13",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L124-L134",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L133-L144"
+          ],
+          "accepted": false
+        },
+        {
+          "qid": "confidence-d27",
+          "family": "validation_errors",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.657127,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            174,
+            181,
+            182
+          ],
+          "found_lines": [
+            174,
+            181,
+            182
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L172-L192",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L227-L240",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L34-L48",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L135-L145",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L215-L226"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d27",
+          "family": "validation_errors",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.671618,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            389,
+            391,
+            392
+          ],
+          "found_lines": [
+            389,
+            391,
+            392
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L387-L420",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L427-L448",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L468-L491",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L435-L476",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1289-L1325"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d28",
+          "family": "validation_errors",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.615451,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            197,
+            198,
+            199,
+            200,
+            202,
+            203,
+            205,
+            206,
+            208,
+            209
+          ],
+          "found_lines": [
+            197,
+            198,
+            199,
+            200,
+            202,
+            203,
+            205,
+            206,
+            208,
+            209
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L185-L208",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L200-L214",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L172-L192",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L551-L559",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L357-L370"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d29",
+          "family": "validation_errors",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.707247,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            177,
+            178,
+            179
+          ],
+          "found_lines": [
+            177,
+            178,
+            179
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L172-L192",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L551-L559",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L459-L476",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L11-L20"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d30",
+          "family": "validation_errors",
+          "release": "v1.10.15",
+          "answerable": false,
+          "score": 0.593878,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L172-L192",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L227-L240",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L34-L48",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L135-L145",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L215-L226"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-d30",
+          "family": "validation_errors",
+          "release": "v2.7.4",
+          "answerable": false,
+          "score": 0.564713,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L387-L420",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L435-L476",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L468-L491",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L427-L448",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1741-L1774"
+          ],
+          "accepted": true
+        }
+      ]
+    },
+    "holdout": {
+      "questions": 20,
+      "resolved_sides": 27,
+      "version_conflicts_rejected": [
+        "confidence-h04",
+        "confidence-h07",
+        "confidence-h13"
+      ],
+      "baseline": {
+        "false_accept": {
+          "count": 10,
+          "total": 10,
+          "rate": 1.0
+        },
+        "false_reject": {
+          "count": 0,
+          "total": 17,
+          "rate": 0.0
+        },
+        "accepted_answerable_missing_gold": {
+          "count": 2,
+          "total": 17,
+          "rate": 0.11764705882352941
+        }
+      },
+      "calibrated": {
+        "false_accept": {
+          "count": 7,
+          "total": 10,
+          "rate": 0.7
+        },
+        "false_reject": {
+          "count": 2,
+          "total": 17,
+          "rate": 0.11764705882352941
+        },
+        "accepted_answerable_missing_gold": {
+          "count": 2,
+          "total": 15,
+          "rate": 0.13333333333333333
+        }
+      },
+      "observations": [
+        {
+          "qid": "confidence-h01",
+          "family": "custom_root",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.671449,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            359,
+            361,
+            362,
+            363
+          ],
+          "found_lines": [
+            359,
+            361,
+            362,
+            363
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L357-L370",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L499-L514",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L375-L387",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L227-L240",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L459-L476"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h02",
+          "family": "custom_root",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.704697,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            1196,
+            1198,
+            1199,
+            1200
+          ],
+          "found_lines": [
+            1196,
+            1198,
+            1199,
+            1200
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1191-L1223",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1234-L1277",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1210-L1252",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1388-L1406",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1278-L1301"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h03",
+          "family": "custom_root",
+          "release": "v1.10.15",
+          "answerable": false,
+          "score": 0.595633,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L357-L370",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L375-L387",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L368-L381",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L484-L498"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h03",
+          "family": "custom_root",
+          "release": "v2.7.4",
+          "answerable": false,
+          "score": 0.600428,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1191-L1223",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1210-L1252",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1234-L1277",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L594-L614",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1666-L1682"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h05",
+          "family": "faux_immutability",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.606863,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [
+            390,
+            391,
+            399,
+            400
+          ],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L459-L476",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L306-L322",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L551-L559",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L515-L527"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h06",
+          "family": "faux_immutability",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.71438,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            1280,
+            1281,
+            1323,
+            1324
+          ],
+          "found_lines": [
+            1280,
+            1281,
+            1323,
+            1324
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1278-L1301",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1289-L1325",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L501-L538",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L323-L335",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1496-L1518"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h08",
+          "family": "field_ordering",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.560002,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [
+            419,
+            420,
+            425,
+            426,
+            428,
+            429
+          ],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L551-L559",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L499-L514",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L11-L20",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L515-L527"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h09",
+          "family": "field_ordering",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.491867,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            415,
+            416,
+            417
+          ],
+          "found_lines": [
+            415,
+            416,
+            417
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L409-L424",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L459-L476",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L468-L478",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L431-L442"
+          ],
+          "accepted": false
+        },
+        {
+          "qid": "confidence-h09",
+          "family": "field_ordering",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.529145,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            1350,
+            1351,
+            1352
+          ],
+          "found_lines": [
+            1350,
+            1351,
+            1352
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1-L13",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1346-L1379",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L220-L232",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L11-L21",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L186-L226"
+          ],
+          "accepted": false
+        },
+        {
+          "qid": "confidence-h10",
+          "family": "field_ordering",
+          "release": "v1.10.15",
+          "answerable": false,
+          "score": 0.442427,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L84-L111",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L409-L424",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L459-L476",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L468-L478",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L431-L442"
+          ],
+          "accepted": false
+        },
+        {
+          "qid": "confidence-h10",
+          "family": "field_ordering",
+          "release": "v2.7.4",
+          "answerable": false,
+          "score": 0.509105,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1-L13",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L186-L226",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L124-L134",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L220-L232",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1496-L1518"
+          ],
+          "accepted": false
+        },
+        {
+          "qid": "confidence-h11",
+          "family": "required_nullable",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.575932,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            451,
+            452,
+            456,
+            457
+          ],
+          "found_lines": [
+            451,
+            452,
+            456,
+            457
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L443-L458",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L459-L476",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L431-L442",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L323-L340"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h12",
+          "family": "required_nullable",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.652038,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            1403,
+            1404,
+            1405
+          ],
+          "found_lines": [
+            1403,
+            1404,
+            1405
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1388-L1406",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L981-L1015",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1278-L1301",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L427-L448",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L897-L928"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h14",
+          "family": "default_values",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.58364,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            461,
+            462
+          ],
+          "found_lines": [
+            461,
+            462
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L459-L476",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L323-L340",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L468-L478",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L122-L134",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L338-L346"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h14",
+          "family": "default_values",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.594885,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            1444,
+            1445
+          ],
+          "found_lines": [
+            1444,
+            1445
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1110-L1147",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1086-L1115",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1420-L1441",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1442-L1471",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L233-L261"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h15",
+          "family": "default_values",
+          "release": "v1.10.15",
+          "answerable": false,
+          "score": 0.553421,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L468-L478",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L459-L476",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L135-L145",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L409-L424"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h15",
+          "family": "default_values",
+          "release": "v2.7.4",
+          "answerable": false,
+          "score": 0.538188,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1442-L1471",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1410-L1428",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1110-L1147",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1508-L1537",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L981-L1015"
+          ],
+          "accepted": false
+        },
+        {
+          "qid": "confidence-h16",
+          "family": "private_attributes",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.664636,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            491,
+            492
+          ],
+          "found_lines": [
+            491,
+            492
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L484-L498",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L375-L387",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L135-L145",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L544-L550",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L528-L546"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h16",
+          "family": "private_attributes",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.628696,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            1535,
+            1536
+          ],
+          "found_lines": [
+            1535,
+            1536
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1508-L1537",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1496-L1518",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1666-L1682",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1609-L1614",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L620-L629"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h17",
+          "family": "private_attributes",
+          "release": "v1.10.15",
+          "answerable": false,
+          "score": 0.656486,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L484-L498",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L528-L546",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L135-L145",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L544-L550"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h17",
+          "family": "private_attributes",
+          "release": "v2.7.4",
+          "answerable": false,
+          "score": 0.642025,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1496-L1518",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1508-L1537",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L620-L629",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L323-L335",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1590-L1611"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h18",
+          "family": "model_signature",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.631325,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            540,
+            541,
+            543,
+            544
+          ],
+          "found_lines": [
+            540,
+            541,
+            543,
+            544
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L528-L546",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L544-L550",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L166-L171",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L515-L527"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h18",
+          "family": "model_signature",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.628793,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            1607,
+            1608,
+            1609,
+            1611,
+            1612,
+            1613
+          ],
+          "found_lines": [
+            1607,
+            1608,
+            1609,
+            1611,
+            1612,
+            1613
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1609-L1614",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L628-L632",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1590-L1611",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1508-L1537",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L620-L629"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h19",
+          "family": "model_signature",
+          "release": "v1.10.15",
+          "answerable": false,
+          "score": 0.572757,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L528-L546",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L544-L550",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L459-L476",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L357-L370",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L227-L240"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h19",
+          "family": "model_signature",
+          "release": "v2.7.4",
+          "answerable": false,
+          "score": 0.603422,
+          "has_hits": true,
+          "covers_gold": false,
+          "gold_lines": [],
+          "found_lines": [],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1563-L1599",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1590-L1611",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L620-L629",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1508-L1537",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1609-L1614"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h20",
+          "family": "pattern_matching",
+          "release": "v1.10.15",
+          "answerable": true,
+          "score": 0.649843,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            558,
+            559
+          ],
+          "found_lines": [
+            558,
+            559
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L551-L559",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L323-L340",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L155-L166",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L1-L13",
+            "https://github.com/pydantic/pydantic/blob/5476a758c8ac59887dbfa3aa1c3481d0a0e20837/docs/usage/models.md#L11-L20"
+          ],
+          "accepted": true
+        },
+        {
+          "qid": "confidence-h20",
+          "family": "pattern_matching",
+          "release": "v2.7.4",
+          "answerable": true,
+          "score": 0.625004,
+          "has_hits": true,
+          "covers_gold": true,
+          "gold_lines": [
+            1641,
+            1642
+          ],
+          "found_lines": [
+            1641,
+            1642
+          ],
+          "source_urls": [
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1615-L1643",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L558-L579",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L220-L232",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1-L13",
+            "https://github.com/pydantic/pydantic/blob/1ab655a54c0defdc5a2a9b13bc90feb6fba78719/docs/concepts/models.md#L1538-L1562"
+          ],
+          "accepted": true
+        }
+      ]
+    }
+  }
+}

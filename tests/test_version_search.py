@@ -99,6 +99,7 @@ def test_cli_and_http_return_same_ranked_evidence_and_http_exposes_trace():
         assert replay["request"] == {
             "kb_id": "pydantic", "query": query, "mode": "compare",
             "versions": [], "top_k": 2, "profile": "bm25",
+            "abstain": False,
         }
         assert client.get("/v1/traces/missing").status_code == 404
 

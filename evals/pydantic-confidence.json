@@ -1,0 +1,975 @@
+[
+  {
+    "qid": "confidence-d01",
+    "family": "orm_attributes",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "在 Pydantic v1.10.15 中，从 ORM 实例读取属性创建模型，要打开哪个配置并调用哪个构造方法？",
+    "mode": "single",
+    "versions": [
+      "v1.10.15"
+    ],
+    "expected": {
+      "v1.10.15": [
+        128,
+        129
+      ]
+    },
+    "note": "128–129 行明确要求 orm_mode=True 和 from_orm。"
+  },
+  {
+    "qid": "confidence-d02",
+    "family": "orm_attributes",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "Pydantic v2.7.4 如何开启任意类实例的属性读取，并把 SQLAlchemy 对象转换为模型？",
+    "mode": "single",
+    "versions": [
+      "v2.7.4"
+    ],
+    "expected": {
+      "v2.7.4": [
+        241,
+        285
+      ]
+    },
+    "note": "241 行给出 from_attributes=True，285 行示范 model_validate(co_orm)。"
+  },
+  {
+    "qid": "confidence-d03",
+    "family": "orm_attributes",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "比较两个选定版本从任意对象属性创建模型时需要的配置和入口 API。",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [
+        128,
+        129
+      ],
+      "v2.7.4": [
+        241,
+        285
+      ]
+    },
+    "note": "同一 ORM 任务按版本分别锚定配置和调用入口。"
+  },
+  {
+    "qid": "confidence-d04",
+    "family": "orm_attributes",
+    "split": "dev",
+    "kind": "unanswerable",
+    "query": "使用 from_orm 或 model_validate 读取 SQLAlchemy 对象时，如何让 Pydantic 自动提交数据库事务？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [],
+      "v2.7.4": []
+    },
+    "note": "已核对两篇固定语料的 ORM 段落，均介绍属性读取和别名，未描述事务提交机制。"
+  },
+  {
+    "qid": "confidence-d05",
+    "family": "orm_attributes",
+    "split": "dev",
+    "kind": "version_conflict",
+    "query": "请只按 Pydantic v2.7.4 说明 from_attributes 的开启方式。",
+    "mode": "single",
+    "versions": [
+      "v1.10.15"
+    ],
+    "expected": {},
+    "note": "问题明确指定 v2.7.4，调用作用域仅为 v1.10.15。"
+  },
+  {
+    "qid": "confidence-d06",
+    "family": "validation_helpers",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "Pydantic v1.10.15 的 parse_obj、parse_raw、parse_file 各自接收什么数据？",
+    "mode": "single",
+    "versions": [
+      "v1.10.15"
+    ],
+    "expected": {
+      "v1.10.15": [
+        231,
+        232,
+        233,
+        234,
+        235,
+        236
+      ]
+    },
+    "note": "231–236 行依次定义字典、JSON 字符串或字节及文件路径输入。"
+  },
+  {
+    "qid": "confidence-d07",
+    "family": "validation_helpers",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "Pydantic v2.7.4 中，model_validate 和 model_validate_json 接受的输入有何区别？",
+    "mode": "single",
+    "versions": [
+      "v2.7.4"
+    ],
+    "expected": {
+      "v2.7.4": [
+        431,
+        432,
+        433,
+        434
+      ]
+    },
+    "note": "431–434 行说明对象或字典输入及 JSON 字符串或字节输入。"
+  },
+  {
+    "qid": "confidence-d08",
+    "family": "validation_helpers",
+    "split": "dev",
+    "kind": "unanswerable",
+    "query": "parse_raw 与 model_validate_json 遇到 JSON 对象中的重复键时，是否会抛错，保留哪个值？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [],
+      "v2.7.4": []
+    },
+    "note": "已核对两篇固定语料的解析辅助函数及 JSON 示例，均未规定重复键策略。"
+  },
+  {
+    "qid": "confidence-d09",
+    "family": "validation_helpers",
+    "split": "dev",
+    "kind": "version_conflict",
+    "query": "只依据 Pydantic v1.10.15，说明 parse_file 如何推断 content_type。",
+    "mode": "single",
+    "versions": [
+      "v2.7.4"
+    ],
+    "expected": {},
+    "note": "问题明确指定 v1.10.15，调用作用域仅为 v2.7.4。"
+  },
+  {
+    "qid": "confidence-d10",
+    "family": "unvalidated_construction",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "Pydantic v1.10.15 的 construct() 是否会执行校验，什么来源的数据适合使用它？",
+    "mode": "single",
+    "versions": [
+      "v1.10.15"
+    ],
+    "expected": {
+      "v1.10.15": [
+        251,
+        252,
+        256,
+        257
+      ]
+    },
+    "note": "251–257 行说明跳过校验以及已校验或可信数据的使用条件。"
+  },
+  {
+    "qid": "confidence-d11",
+    "family": "unvalidated_construction",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "Pydantic v2.7.4 的 model_construct() 会校验输入吗，应该传入什么数据？",
+    "mode": "single",
+    "versions": [
+      "v2.7.4"
+    ],
+    "expected": {
+      "v2.7.4": [
+        550,
+        563,
+        564
+      ]
+    },
+    "note": "550 行说明无校验，563–564 行限制为已验证或确定可信的数据。"
+  },
+  {
+    "qid": "confidence-d12",
+    "family": "unvalidated_construction",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "比较两个版本不经校验构建模型时省略 _fields_set 的效果。",
+    "mode": "compare",
+    "versions": [
+      "v2.7.4",
+      "v1.10.15"
+    ],
+    "expected": {
+      "v2.7.4": [
+        603,
+        604,
+        605
+      ],
+      "v1.10.15": [
+        261,
+        262,
+        263
+      ]
+    },
+    "note": "两版本均使用传入数据的键作为已设置字段集合，键顺序按请求版本排列。"
+  },
+  {
+    "qid": "confidence-d13",
+    "family": "unvalidated_construction",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "Pydantic v2.7.4 中 model_construct() 能否把嵌套字典自动构造成子模型？",
+    "mode": "single",
+    "versions": [
+      "v2.7.4"
+    ],
+    "expected": {
+      "v2.7.4": [
+        615,
+        616,
+        617,
+        618
+      ]
+    },
+    "note": "615–618 行直接要求调用方先转换内部字典，并说明无法递归构造。"
+  },
+  {
+    "qid": "confidence-d14",
+    "family": "unvalidated_construction",
+    "split": "dev",
+    "kind": "unanswerable",
+    "query": "construct() 和 model_construct() 在处理一万个字段时各需要多少毫秒？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [],
+      "v2.7.4": []
+    },
+    "note": "已核对两篇固定语料的无校验构造性能说明，v1 给出概略倍数，v2 建议实测，均无一万个字段的毫秒数据。"
+  },
+  {
+    "qid": "confidence-d15",
+    "family": "generic_models",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "Pydantic v1.10.15 声明泛型模型时应继承哪些基类，TypeVar 如何使用？",
+    "mode": "single",
+    "versions": [
+      "v1.10.15"
+    ],
+    "expected": {
+      "v1.10.15": [
+        274,
+        275,
+        276,
+        277,
+        278
+      ]
+    },
+    "note": "274–278 行给出 TypeVar、GenericModel 与 typing.Generic 的声明步骤。"
+  },
+  {
+    "qid": "confidence-d16",
+    "family": "generic_models",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "Pydantic v2.7.4 的泛型模型要继承哪些基类，并在哪里放 TypeVar？",
+    "mode": "single",
+    "versions": [
+      "v2.7.4"
+    ],
+    "expected": {
+      "v2.7.4": [
+        639,
+        640,
+        641,
+        642,
+        643
+      ]
+    },
+    "note": "639–643 行要求 BaseModel 与 typing.Generic，并使用 TypeVar 注解。"
+  },
+  {
+    "qid": "confidence-d17",
+    "family": "generic_models",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "两个版本的泛型模型在运行时会生成并缓存具体模型类吗？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [
+        292,
+        293
+      ],
+      "v2.7.4": [
+        693,
+        694
+      ]
+    },
+    "note": "v1 说明通过 create_model 生成缓存模型，v2 说明生成并缓存 BaseModel 子类。"
+  },
+  {
+    "qid": "confidence-d18",
+    "family": "generic_models",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "Pydantic v2.7.4 未给泛型模型指定类型参数时，有界和无界 TypeVar 分别如何校验？",
+    "mode": "single",
+    "versions": [
+      "v2.7.4"
+    ],
+    "expected": {
+      "v2.7.4": [
+        850,
+        851
+      ]
+    },
+    "note": "850–851 行区分按 bound 校验和按 Any 处理。"
+  },
+  {
+    "qid": "confidence-d19",
+    "family": "generic_models",
+    "split": "dev",
+    "kind": "unanswerable",
+    "query": "泛型模型生成的具体子类缓存最多有多少条记录，何时按 LRU 淘汰？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [],
+      "v2.7.4": []
+    },
+    "note": "已核对两篇固定语料的泛型缓存说明，两者均提及缓存，均未给出容量或淘汰算法。"
+  },
+  {
+    "qid": "confidence-d20",
+    "family": "dynamic_models",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "运行时才知道字段结构时，两个版本提供什么动态建模函数，如何指定基类和额外校验器？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [
+        325,
+        326,
+        338,
+        339,
+        343
+      ],
+      "v2.7.4": [
+        1091,
+        1092,
+        1127,
+        1128,
+        1151
+      ]
+    },
+    "note": "create_model、__base__ 和 __validators__ 在两篇语料中均有明确说明。"
+  },
+  {
+    "qid": "confidence-d21",
+    "family": "dynamic_models",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "Pydantic v1.10.15 能否从已有 NamedTuple 或 TypedDict 生成模型，提供哪些函数？",
+    "mode": "single",
+    "versions": [
+      "v1.10.15"
+    ],
+    "expected": {
+      "v1.10.15": [
+        349,
+        350,
+        351,
+        352
+      ]
+    },
+    "note": "349–352 行列出 create_model_from_namedtuple 和 create_model_from_typeddict。"
+  },
+  {
+    "qid": "confidence-d22",
+    "family": "dynamic_models",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "Pydantic v2.7.4 动态创建的模型要能被 pickle，需要满足什么条件？",
+    "mode": "single",
+    "versions": [
+      "v2.7.4"
+    ],
+    "expected": {
+      "v2.7.4": [
+        1186,
+        1188,
+        1189
+      ]
+    },
+    "note": "1186–1189 行要求全局定义并提供 __module__。"
+  },
+  {
+    "qid": "confidence-d23",
+    "family": "dynamic_models",
+    "split": "dev",
+    "kind": "unanswerable",
+    "query": "多个线程同时调用 create_model 创建同名类时，Pydantic 是否保证得到同一个类对象？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [],
+      "v2.7.4": []
+    },
+    "note": "已核对两篇固定语料的动态创建段落，均无同名类并发调用、锁或类身份保证。"
+  },
+  {
+    "qid": "confidence-d24",
+    "family": "schema_rebuild",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "比较所选文档，model_rebuild() 在最外层模型调用时会构建什么，调用前有哪些类型必须就绪？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [],
+      "v2.7.4": [
+        229,
+        230,
+        231
+      ]
+    },
+    "note": "v2 的 229–231 行说明整棵嵌套模型核心 schema 及全部类型就绪要求，已核对 v1 全文无 model_rebuild 说明。"
+  },
+  {
+    "qid": "confidence-d25",
+    "family": "schema_rebuild",
+    "split": "dev",
+    "kind": "unanswerable",
+    "query": "递归模型的 schema 重建最多支持多少层嵌套，达到上限后会出现什么错误码？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [],
+      "v2.7.4": []
+    },
+    "note": "已核对两篇固定语料的递归模型、schema 与重建说明，均未给出重建嵌套深度上限及其错误码。"
+  },
+  {
+    "qid": "confidence-d26",
+    "family": "schema_rebuild",
+    "split": "dev",
+    "kind": "version_conflict",
+    "query": "仅根据 Pydantic v2.7.4，说明 model_rebuild() 替代了哪个旧方法。",
+    "mode": "single",
+    "versions": [
+      "v1.10.15"
+    ],
+    "expected": {},
+    "note": "问题明确指定 v2.7.4，调用作用域仅为 v1.10.15。"
+  },
+  {
+    "qid": "confidence-d27",
+    "family": "validation_errors",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "两个版本在一次校验发现多个错误时，会抛出几个 ValidationError，是否包含所有错误？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [
+        174,
+        181,
+        182
+      ],
+      "v2.7.4": [
+        389,
+        391,
+        392
+      ]
+    },
+    "note": "两篇均明确一次异常汇总全部错误。"
+  },
+  {
+    "qid": "confidence-d28",
+    "family": "validation_errors",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "Pydantic v1.10.15 的 errors() 中 loc、type、msg、ctx 分别表示什么？",
+    "mode": "single",
+    "versions": [
+      "v1.10.15"
+    ],
+    "expected": {
+      "v1.10.15": [
+        197,
+        198,
+        199,
+        200,
+        202,
+        203,
+        205,
+        206,
+        208,
+        209
+      ]
+    },
+    "note": "197–209 行逐项定义错误位置、标识、消息和可选上下文。"
+  },
+  {
+    "qid": "confidence-d29",
+    "family": "validation_errors",
+    "split": "dev",
+    "kind": "answerable",
+    "query": "Pydantic v1.10.15 中，自定义校验代码应抛出哪些异常，随后如何汇入 ValidationError？",
+    "mode": "single",
+    "versions": [
+      "v1.10.15"
+    ],
+    "expected": {
+      "v1.10.15": [
+        177,
+        178,
+        179
+      ]
+    },
+    "note": "177–179 行列出 ValueError、TypeError、AssertionError 及捕获汇总过程。"
+  },
+  {
+    "qid": "confidence-d30",
+    "family": "validation_errors",
+    "split": "dev",
+    "kind": "unanswerable",
+    "query": "如何配置 ValidationError，让内置错误消息自动根据用户语言切换为简体中文？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [],
+      "v2.7.4": []
+    },
+    "note": "已核对两篇固定语料的错误处理、自定义错误及示例，均无语言协商或内置消息自动中文化配置。"
+  },
+  {
+    "qid": "confidence-h01",
+    "family": "custom_root",
+    "split": "holdout",
+    "kind": "answerable",
+    "query": "Pydantic v1.10.15 的自定义根类型用哪个字段声明，根值如何传给构造器或 parse_obj？",
+    "mode": "single",
+    "versions": [
+      "v1.10.15"
+    ],
+    "expected": {
+      "v1.10.15": [
+        359,
+        361,
+        362,
+        363
+      ]
+    },
+    "note": "359–363 行定义 __root__ 类型注解及两种根值输入方式。"
+  },
+  {
+    "qid": "confidence-h02",
+    "family": "custom_root",
+    "split": "holdout",
+    "kind": "answerable",
+    "query": "Pydantic v2.7.4 如何用 RootModel 声明自定义根类型，并传入根值？",
+    "mode": "single",
+    "versions": [
+      "v2.7.4"
+    ],
+    "expected": {
+      "v2.7.4": [
+        1196,
+        1198,
+        1199,
+        1200
+      ]
+    },
+    "note": "1196–1200 行说明 RootModel 子类、泛型参数和单位置参数根值。"
+  },
+  {
+    "qid": "confidence-h03",
+    "family": "custom_root",
+    "split": "holdout",
+    "kind": "unanswerable",
+    "query": "自定义根类型为字符串列表时，如何让 __root__ 或 RootModel 在超过十个元素时自动截断？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [],
+      "v2.7.4": []
+    },
+    "note": "已核对两篇固定语料的根类型、解析及列表访问示例，均无超长列表自动截断配置。"
+  },
+  {
+    "qid": "confidence-h04",
+    "family": "custom_root",
+    "split": "holdout",
+    "kind": "version_conflict",
+    "query": "请只使用 Pydantic v1.10.15 的模型文档解释 __root__ 的声明方式。",
+    "mode": "single",
+    "versions": [
+      "v2.7.4"
+    ],
+    "expected": {},
+    "note": "问题明确指定 v1.10.15，调用作用域仅为 v2.7.4。"
+  },
+  {
+    "qid": "confidence-h05",
+    "family": "faux_immutability",
+    "split": "holdout",
+    "kind": "answerable",
+    "query": "Pydantic v1.10.15 怎么禁止重新赋值模型属性，模型里的 dict 内容还能修改吗？",
+    "mode": "single",
+    "versions": [
+      "v1.10.15"
+    ],
+    "expected": {
+      "v1.10.15": [
+        390,
+        391,
+        399,
+        400
+      ]
+    },
+    "note": "390–391 行给出 allow_mutation=False，399–400 行说明嵌套字典仍可改变。"
+  },
+  {
+    "qid": "confidence-h06",
+    "family": "faux_immutability",
+    "split": "holdout",
+    "kind": "answerable",
+    "query": "Pydantic v2.7.4 如何冻结模型属性，frozen=True 会阻止修改内部字典吗？",
+    "mode": "single",
+    "versions": [
+      "v2.7.4"
+    ],
+    "expected": {
+      "v2.7.4": [
+        1280,
+        1281,
+        1323,
+        1324
+      ]
+    },
+    "note": "1280–1281 行给出 frozen 配置，1323–1324 行保留内部字典可变性。"
+  },
+  {
+    "qid": "confidence-h07",
+    "family": "faux_immutability",
+    "split": "holdout",
+    "kind": "version_conflict",
+    "query": "只依据 Pydantic v2.7.4 说明 frozen 的配置写法。",
+    "mode": "single",
+    "versions": [
+      "v1.10.15"
+    ],
+    "expected": {},
+    "note": "问题明确指定 v2.7.4，调用作用域仅为 v1.10.15。"
+  },
+  {
+    "qid": "confidence-h08",
+    "family": "field_ordering",
+    "split": "holdout",
+    "kind": "answerable",
+    "query": "Pydantic v1.10.15 混用有类型注解和无注解字段时，会按什么次序排列，文档建议如何避免意外？",
+    "mode": "single",
+    "versions": [
+      "v1.10.15"
+    ],
+    "expected": {
+      "v1.10.15": [
+        419,
+        420,
+        425,
+        426,
+        428,
+        429
+      ]
+    },
+    "note": "419–420 行说明分组次序，428–429 行建议所有字段都加类型注解。"
+  },
+  {
+    "qid": "confidence-h09",
+    "family": "field_ordering",
+    "split": "holdout",
+    "kind": "answerable",
+    "query": "比较两个版本，字段的顺序在哪些 schema、错误和序列化结果中得到保留？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [
+        415,
+        416,
+        417
+      ],
+      "v2.7.4": [
+        1350,
+        1351,
+        1352
+      ]
+    },
+    "note": "两篇逐条说明 schema、校验错误及导出方法保留字段顺序。"
+  },
+  {
+    "qid": "confidence-h10",
+    "family": "field_ordering",
+    "split": "holdout",
+    "kind": "unanswerable",
+    "query": "如何让模型的 schema 和字典导出自动按照中文字段别名的拼音顺序排列？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [],
+      "v2.7.4": []
+    },
+    "note": "已核对两篇固定语料的字段顺序、别名与导出说明，均无中文别名拼音排序选项。"
+  },
+  {
+    "qid": "confidence-h11",
+    "family": "required_nullable",
+    "split": "holdout",
+    "kind": "answerable",
+    "query": "Pydantic v1.10.15 中，怎样声明一个允许 None 但输入时仍必须提供的字段？",
+    "mode": "single",
+    "versions": [
+      "v1.10.15"
+    ],
+    "expected": {
+      "v1.10.15": [
+        451,
+        452,
+        456,
+        457
+      ]
+    },
+    "note": "451–457 行说明 Optional 配合省略号，并强调必须给值，即便给 None。"
+  },
+  {
+    "qid": "confidence-h12",
+    "family": "required_nullable",
+    "split": "holdout",
+    "kind": "answerable",
+    "query": "Pydantic v2.7.4 中，仅标注 Optional 或 Any 而没有显式默认值，会隐式得到 None 吗？",
+    "mode": "single",
+    "versions": [
+      "v2.7.4"
+    ],
+    "expected": {
+      "v2.7.4": [
+        1403,
+        1404,
+        1405
+      ]
+    },
+    "note": "1403–1405 行明确 V2 取消由类型注解产生隐式默认值的行为。"
+  },
+  {
+    "qid": "confidence-h13",
+    "family": "required_nullable",
+    "split": "holdout",
+    "kind": "version_conflict",
+    "query": "仅查看 Pydantic v1.10.15，说明 Optional 与省略号如何定义必填可空字段。",
+    "mode": "single",
+    "versions": [
+      "v2.7.4"
+    ],
+    "expected": {},
+    "note": "问题明确指定 v1.10.15，调用作用域仅为 v2.7.4。"
+  },
+  {
+    "qid": "confidence-h14",
+    "family": "default_values",
+    "split": "holdout",
+    "kind": "answerable",
+    "query": "两个版本分别推荐用什么机制让字段默认值在每个模型实例创建时动态生成？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [
+        461,
+        462
+      ],
+      "v2.7.4": [
+        1444,
+        1445
+      ]
+    },
+    "note": "两篇均直接给出 default_factory 作为动态默认值机制。"
+  },
+  {
+    "qid": "confidence-h15",
+    "family": "default_values",
+    "split": "holdout",
+    "kind": "unanswerable",
+    "query": "Field(default_factory=...) 中的工厂抛出网络超时异常后，怎样配置自动重试三次和指数退避？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [],
+      "v2.7.4": []
+    },
+    "note": "已核对两篇固定语料的动态默认值段落与示例，均未说明工厂异常的网络重试或退避策略。"
+  },
+  {
+    "qid": "confidence-h16",
+    "family": "private_attributes",
+    "split": "holdout",
+    "kind": "answerable",
+    "query": "比较两个版本，PrivateAttr 的名称可以使用 __attr__ 这样的双下划线形式吗？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [
+        491,
+        492
+      ],
+      "v2.7.4": [
+        1535,
+        1536
+      ]
+    },
+    "note": "v1 明确支持 _attr 和 __attr__，v2 明确不支持 dunder 名称，必须分别取证。"
+  },
+  {
+    "qid": "confidence-h17",
+    "family": "private_attributes",
+    "split": "holdout",
+    "kind": "unanswerable",
+    "query": "如何配置 PrivateAttr，让私有属性在保存模型时自动用 AES 加密并在加载时解密？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [],
+      "v2.7.4": []
+    },
+    "note": "已核对两篇固定语料的私有属性定义、默认工厂和初始化说明，均未提供加密或解密配置。"
+  },
+  {
+    "qid": "confidence-h18",
+    "family": "model_signature",
+    "split": "holdout",
+    "kind": "answerable",
+    "query": "两个版本生成模型签名时，字段别名和字段名谁优先，什么时候会加入 **data？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [
+        540,
+        541,
+        543,
+        544
+      ],
+      "v2.7.4": [
+        1607,
+        1608,
+        1609,
+        1611,
+        1612,
+        1613
+      ]
+    },
+    "note": "两篇均说明合法标识符要求、别名优先以及名称都无效或 extra=allow 时加入 **data。"
+  },
+  {
+    "qid": "confidence-h19",
+    "family": "model_signature",
+    "split": "holdout",
+    "kind": "unanswerable",
+    "query": "用 functools.wraps 装饰模型的自定义 __init__ 后，inspect.signature 会优先使用 __wrapped__ 还是 __signature__？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [],
+      "v2.7.4": []
+    },
+    "note": "已核对两篇固定语料的模型签名与自定义 __init__ 示例，均未讨论 functools.wraps、__wrapped__ 或 __signature__ 的优先级。"
+  },
+  {
+    "qid": "confidence-h20",
+    "family": "pattern_matching",
+    "split": "holdout",
+    "kind": "answerable",
+    "query": "在两个版本中，match-case 匹配 Pydantic 模型时会创建新模型吗，实际执行了什么？",
+    "mode": "compare",
+    "versions": [
+      "v1.10.15",
+      "v2.7.4"
+    ],
+    "expected": {
+      "v1.10.15": [
+        558,
+        559
+      ],
+      "v2.7.4": [
+        1641,
+        1642
+      ]
+    },
+    "note": "两篇均说明匹配只是访问属性、比较或声明并初始化变量的语法糖。"
+  }
+]
