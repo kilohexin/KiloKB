@@ -41,6 +41,26 @@ python -m uvicorn kilokb.api:app --host 127.0.0.1 --port 8000
 
 用 `GET /v1/traces/{trace_id}` 查看原始请求参数，以及各阶段的候选 ID、名次、耗时和返回数量。每个服务进程保留最近 128 条轨迹。默认 `bm25` 可离线运行。使用 `dense` 或 `hybrid_rrf` 前，按下文准备 BGE-M3 依赖和模型缓存。首次请求对选中的版本计算文档向量，后续请求在同一进程内复用。 [双版本 Hybrid 轨迹样例](reports/pydantic-search-trace.json)
 
+## 增量索引与版本快照
+
+一个 SQLite 文件维护一个知识库。提交完整的目标清单后，`enqueue` 校验源文档 SHA-256 并保存输入，`run` 领取租约、构建独立暂存快照并发布。相同目标可以复用任务，暂存成功后中断可用同一 job 重试。省略清单中的文档会将其从下一代索引移除。
+
+```powershell
+python -m pip install -r requirements-dense.txt
+$queued = python -m kilokb index --db kilokb-local.sqlite enqueue --manifest corpora/pydantic-snapshot.json | ConvertFrom-Json
+python -m kilokb index --db kilokb-local.sqlite run --job $queued.id --local-files-only
+python -m kilokb index --db kilokb-local.sqlite status --job $queued.id
+python -m kilokb search --snapshot-db kilokb-local.sqlite --kb-id pydantic --query "V2 from_attributes" --trace
+```
+
+首次运行需准备 BGE-M3 缓存，或者在允许下载的环境中运行并省略 `--local-files-only`。HTTP 服务设置 `KILOKB_SNAPSHOT_DB` 指向同一文件，即可读取已发布内容。HTTP 请求可使用 `generation_id`，CLI 可传 `--generation-id`，把多步查询固定到同一已发布代次。省略代次时读取当前发布指针。所有已发布代次保留，可复查旧引用。
+
+- 更新按当前源文件重新生成 chunk 和引用，实际编码输入与配置一致时复用向量。发布统计包含文档新增、修改、删除、编码、复用和快照 chunk 数。
+- 租约与任务顺序在发布事务中检查。租约失效或新任务已登记时，旧尝试无法切换发布指针。
+- 检索读取被固定的整代数据，BM25 在该代文档上打分，Dense 用持久化向量做精确余弦检索。已校准的拒答策略绑定原评测快照，发布新语料需要重新标注和校准。
+
+当前后端用于单机与可复现验证。SQLite 同时持久化任务、暂存、向量和已发布快照。测试覆盖更新、删除、引用行号移动、失败重试、租约过期、乱序发布、HTTP 固定代次，以及增量与冷缓存全量构建的 Top K 对照。
+
 ## 拒答评测与阈值
 
 [题集](evals/pydantic-confidence.json)覆盖有答案、库内无答案和版本冲突。50 道题按题族拆成开发集 30 道和留出集 20 道。无答案标注以仓库锁定的两份文档为范围。比较题按版本侧计分，版本冲突单独统计。

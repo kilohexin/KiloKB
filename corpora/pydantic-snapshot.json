@@ -1,0 +1,24 @@
+{
+  "kb_id": "pydantic",
+  "repo": "pydantic/pydantic",
+  "default_release": "v2.7.4",
+  "aliases": {"v1": "v1.10.15", "v2": "v2.7.4"},
+  "releases": {
+    "v1.10.15": [
+      {
+        "commit": "5476a758c8ac59887dbfa3aa1c3481d0a0e20837",
+        "path": "docs/usage/models.md",
+        "snapshot": "pydantic/v1.10.15-models.md",
+        "sha256": "93a04c0e93631d0e7be8910014a3176b07502b4852e5ba606ffa693d7c2a6c21"
+      }
+    ],
+    "v2.7.4": [
+      {
+        "commit": "1ab655a54c0defdc5a2a9b13bc90feb6fba78719",
+        "path": "docs/concepts/models.md",
+        "snapshot": "pydantic/v2.7.4-models.md",
+        "sha256": "8cb75405555cae1ea233aab26294e060ea62f71a9d8e011fd46cdc89511425e2"
+      }
+    ]
+  }
+}

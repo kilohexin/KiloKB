@@ -22,6 +22,8 @@ class Source:
 
     def chunk_id(self, chunk: Chunk) -> str:
         fields = [self.release, self.commit, self.path, chunk.start_line, chunk.end_line]
+        if chunk.document_key is not None:
+            fields.insert(0, self.repo)
         return hashlib.sha256(json.dumps(fields, separators=(",", ":")).encode()).hexdigest()
 
     def hit(self, chunk: Chunk, score: float, *, ranks: dict[str, int | None] | None = None) -> dict:

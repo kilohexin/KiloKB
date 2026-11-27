@@ -14,6 +14,7 @@ class Chunk:
     end_line: int
     heading_path: tuple[str, ...]
     text: str
+    document_key: str | None = None
 
     @property
     def retrieval_text(self) -> str:
