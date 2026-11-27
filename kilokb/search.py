@@ -43,35 +43,44 @@ class SearchRequest:
     abstain: bool = False
 
 
-def stage_items(source: Source, hits: list[tuple[Chunk, float]]) -> list[dict]:
+def stage_items(source_for_chunk, hits: list[tuple[Chunk, float]]) -> list[dict]:
     return [
-        {"chunk_id": source.chunk_id(chunk), "rank": rank, "score": score}
+        {"chunk_id": source_for_chunk(chunk).chunk_id(chunk), "rank": rank, "score": score}
         for rank, (chunk, score) in enumerate(hits, 1)
     ]
 
 
 class SearchService:
-    def __init__(self, device: str = "cpu", local_files_only: bool = True) -> None:
-        self.lock = read_lock()
-        self.sources = {tag: load_source(self.lock, tag) for tag in self.lock["releases"]}
-        self.chunks = {tag: chunk_markdown(source.text, CHUNK_WORDS) for tag, source in self.sources.items()}
-        signature = json.dumps({
-            "corpus": self.lock, "chunk_words": CHUNK_WORDS, "dense_revision": MODEL_REVISION,
-            "chunk_ids": {tag: [self.sources[tag].chunk_id(chunk) for chunk in chunks]
-                          for tag, chunks in self.chunks.items()},
-        }, sort_keys=True)
-        self.generation_id = hashlib.sha256(signature.encode()).hexdigest()
+    def __init__(self, device: str = "cpu", local_files_only: bool = True, *, snapshot=None) -> None:
+        if snapshot is None:
+            self.kb_id = "pydantic"
+            self.lock = read_lock()
+            self.sources = {tag: load_source(self.lock, tag) for tag in self.lock["releases"]}
+            self.chunks = {tag: chunk_markdown(source.text, CHUNK_WORDS) for tag, source in self.sources.items()}
+            signature = json.dumps({
+                "corpus": self.lock, "chunk_words": CHUNK_WORDS, "dense_revision": MODEL_REVISION,
+                "chunk_ids": {tag: [self.sources[tag].chunk_id(chunk) for chunk in chunks]
+                              for tag, chunks in self.chunks.items()},
+            }, sort_keys=True)
+            self.generation_id = hashlib.sha256(signature.encode()).hexdigest()
+            self.vectors = {}
+        else:
+            self.kb_id = snapshot.scope["kb_id"]
+            self.lock = snapshot.scope
+            self.sources = snapshot.sources
+            self.chunks = snapshot.chunks
+            self.generation_id = snapshot.generation_id
+            self.vectors = snapshot.vectors
         self.device = device
         self.local_files_only = local_files_only
         self.model = None
-        self.vectors = {}
         self.model_guard = Lock()
         self.traces: deque[dict] = deque(maxlen=128)
         self.trace_guard = Lock()
 
     def search(self, request: SearchRequest) -> dict:
-        if request.kb_id != "pydantic":
-            raise SearchError("unknown_kb", "Available knowledge base: pydantic", 404)
+        if request.kb_id != self.kb_id:
+            raise SearchError("unknown_kb", f"Available knowledge base: {self.kb_id}", 404)
         if request.mode not in ("single", "compare"):
             raise SearchError("invalid_mode", "Choose single or compare")
         if request.profile not in PROFILES:
@@ -165,23 +174,25 @@ class SearchService:
     def _group(
         self, tag: str, request: SearchRequest, dense_result: tuple | None, threshold: float | None,
     ) -> tuple[dict, dict]:
-        source = self.sources[tag]
+        def source_for_chunk(chunk: Chunk) -> Source:
+            return self.sources[chunk.document_key or tag]
+
         stages = {}
         timings = {}
         if request.profile != "dense":
             started = perf_counter()
             bm25 = search_bm25(request.query, self.chunks[tag], RRF_CANDIDATES)
             timings["bm25"] = (perf_counter() - started) * 1000
-            stages["bm25"] = stage_items(source, bm25)
+            stages["bm25"] = stage_items(source_for_chunk, bm25)
         if dense_result is not None:
             dense, timings["dense"] = dense_result
-            stages["dense"] = stage_items(source, dense)
+            stages["dense"] = stage_items(source_for_chunk, dense)
 
         if request.profile == "hybrid_rrf":
             started = perf_counter()
             fused = fuse_rrf(bm25, dense, MAX_TOP_K)
             timings["rrf"] = (perf_counter() - started) * 1000
-            stages["rrf"] = stage_items(source, [(hit.chunk, hit.score) for hit in fused])
+            stages["rrf"] = stage_items(source_for_chunk, [(hit.chunk, hit.score) for hit in fused])
             ranked = [(hit.chunk, hit.score, {**hit.ranks, "rrf": index})
                       for index, hit in enumerate(fused, 1)]
             score_stage = "rrf"
@@ -193,6 +204,7 @@ class SearchService:
 
         hits = []
         for chunk, score, ranks in ranked[:request.top_k]:
+            source = source_for_chunk(chunk)
             citation = source.hit(chunk, score)
             hits.append({
                 "chunk_id": source.chunk_id(chunk),

@@ -46,6 +46,9 @@ def main() -> None:
     search.add_argument("--device", choices=("cpu", "cuda"), default="cpu")
     search.add_argument("--trace", action="store_true", help="Include the retrieval trace in JSON")
     search.add_argument("--abstain", action="store_true", help="Use the calibrated evidence policy")
+    search.add_argument("--snapshot-db", type=Path, help="Read an active or pinned published snapshot")
+    search.add_argument("--kb-id", default="pydantic")
+    search.add_argument("--generation-id", help="Read a specific published generation")
     compare = commands.add_parser("orm-compare", help="Compare BM25 and BGE-M3 on fixed Chinese questions")
     compare.add_argument("--hybrid", action="store_true", help="Include RRF and questions with API names")
     add_ranking_options(compare)
@@ -63,10 +66,20 @@ def main() -> None:
     confidence = commands.add_parser("confidence-eval", help="Calibrate on dev and evaluate on held-out families")
     confidence.add_argument("--policy-out", type=Path)
     add_model_options(confidence)
+    index = commands.add_parser("index", help="Enqueue and publish durable snapshot jobs")
+    index.add_argument("--db", type=Path, required=True)
+    operations = index.add_subparsers(dest="operation", required=True)
+    enqueue = operations.add_parser("enqueue", help="Capture a complete target manifest")
+    enqueue.add_argument("--manifest", type=Path, required=True)
+    run = operations.add_parser("run", help="Build, validate and publish a job, or retry a failure")
+    run.add_argument("--job", type=int, required=True)
+    add_model_options(run)
+    inspect = operations.add_parser("status", help="Inspect a job and current active generation")
+    inspect.add_argument("--job", type=int, required=True)
     options = parser.parse_args()
     command = {"orm-demo": demo, "orm-compare": compare, "search": search,
                "orm-rerank-freeze": freeze, "orm-rerank": rerank,
-               "confidence-eval": confidence}[options.command]
+               "confidence-eval": confidence, "index": index}[options.command]
     for field in ("chunk_words", "top_k", "rounds"):
         if getattr(options, field, 1) < 1:
             command.error(f"--{field.replace('_', '-')} must be positive")
@@ -80,12 +93,27 @@ def main() -> None:
             from .search import SearchRequest, SearchService
             from .version_scope import SearchError
 
-            service = SearchService(device=options.device)
+            if options.snapshot_db is None:
+                service = SearchService(device=options.device)
+                generation = None
+            else:
+                from .snapshot_search import PublishedSearch
+                from .snapshots import SnapshotStore
+
+                service = PublishedSearch(SnapshotStore(options.snapshot_db), device=options.device)
+                generation = options.generation_id
             try:
-                result = service.search(SearchRequest(
+                request = SearchRequest(
                     query=options.query, mode=options.mode, versions=tuple(options.versions),
                     top_k=options.top_k, profile=options.profile, abstain=options.abstain,
-                ))
+                    kb_id=options.kb_id,
+                )
+                if options.snapshot_db is not None:
+                    result = service.search(request, generation)
+                else:
+                    if options.generation_id is not None and options.generation_id != service.generation_id:
+                        raise SearchError("unknown_generation", "Published generation not found", 404)
+                    result = service.search(request)
             except SearchError as exc:
                 sys.exit(json.dumps(exc.detail))
             if options.trace:
@@ -118,6 +146,27 @@ def main() -> None:
             result = run_evaluation(DATASET, options.device, options.local_files_only)
             if options.policy_out:
                 options.policy_out.write_bytes((json.dumps(result["policy"], indent=2) + "\n").encode())
+        elif options.command == "index":
+            from .snapshots import SnapshotStore
+
+            store = SnapshotStore(options.db)
+            if options.operation == "enqueue":
+                job = store.enqueue(options.manifest)
+            else:
+                job = options.job
+                if options.operation == "run":
+                    from .dense import BgeM3
+
+                    model = None
+
+                    def encode(texts):
+                        nonlocal model
+                        if model is None:
+                            model = BgeM3(options.device, options.local_files_only)
+                        return model.encode(texts)
+
+                    store.run(job, encode)
+            result = {**store.status(job), "active_generation": store.active_id()}
         else:
             result = run_demo(lock, options)
     except (OSError, RuntimeError, ValueError) as exc:
